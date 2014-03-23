@@ -15,6 +15,7 @@ namespace Blackjack
 			Suit cardSuit;
 
 		public:
+			Card();//Default Cunstructor.
 			Card( Rank newCardRank, Suit newCardSuit );//Initializes the card's value.
 			void setRank( Rank newCardRank );//Set the rank.
 			int getRank() const;//Return the rank.
