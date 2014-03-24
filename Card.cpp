@@ -122,42 +122,55 @@ namespace Blackjack
 		{
 			case Two:
 				out << "Two ";
+				break;
 
 			case Three:
 				out << "Three ";
+				break;
 
 			case Four:
 				out << "Four ";
+				break;
 
 			case Five:
 				out << "Five ";
+				break;
 
 			case Six:
 				out << "Six ";
+				break;
 
 			case Seven:
 				out << "Seven ";
+				break;
 
 			case Eight:
 				out << "Eight ";
+				break;
 
 			case Nine:
 				out << "Nine ";
+				break;
 
 			case Ten:
 				out << "Ten ";
+				break;
 
 			case Jack:
 				out << "Jack ";
+				break;
 
 			case Queen:
 				out << "Queen ";
+				break;
 
 			case King:
 				out << "King ";
+				break;
 
 			case Ace:
 				out << "Ace ";
+				break;
 
 			default:
 				std::ostringstream buffer;
@@ -171,20 +184,26 @@ namespace Blackjack
 		{
 			case Clubs:
 				out << "Clubs";
+				break;
 
 			case Diamonds:
 				out << "Diamonds";
+				break;
 
 			case Hearts:
 				out << "Hearts";
+				break;
 
 			case Spades:
 				out << "Spades";
+				break;
 
 			default:
 				std::ostringstream buffer;
 				buffer << "Suit " << c.getSuit() << " is invalid in << operator.";
 				throw std::out_of_range( buffer.str() );
 		}
+
+		return out;
 	}
 }
