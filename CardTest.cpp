@@ -12,10 +12,10 @@ class CardTest : public CppUnit::TestCase
 		
 	public:
 		void testCreateCard()
-		{//Basic test of creating a vertex.
+		{//Basic test of creating a card.
 			//Set up the vertex.
 			Blackjack::Card c(Blackjack::Two, Blackjack::Clubs);
-			
+
 			//Verify the values.
 			CPPUNIT_ASSERT( c.getRank() == Blackjack::Two );
 			CPPUNIT_ASSERT( c.getSuit() == Blackjack::Clubs );
@@ -24,7 +24,7 @@ class CardTest : public CppUnit::TestCase
 		}
 
 		void testCreateAllCardCombinations()
-		{//Basic test of creating a vertex.
+		{//Test creating all combinations of cards.
 			std::vector<Blackjack::Card> cards;
 
 			for( int i = 0; i < 52; i++ )
@@ -228,7 +228,7 @@ class CardTest : public CppUnit::TestCase
 		}
 
 		void testChangeCard()
-		{//Basic test of creating a vertex.
+		{//Test changing the card values.
 			//Set up the vertex.
 			Blackjack::Card c(Blackjack::Two, Blackjack::Clubs);
 
