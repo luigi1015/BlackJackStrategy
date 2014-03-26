@@ -5,12 +5,11 @@
 #include <iostream>
 #include <vector>
 #include "Hand.h"
-//#include "Card.cpp"
 
 class CardTest : public CppUnit::TestCase 
 {
 	private:
-		
+
 	public:
 		void testCreateHand()
 		{//Basic test of creating a hand.
@@ -19,7 +18,7 @@ class CardTest : public CppUnit::TestCase
 
 			//Verify the hand without cards.
 			CPPUNIT_ASSERT( h.getNumCards() == 0 );
-			
+
 			//Add a card.
 			h.addCard( Blackjack::Two, Blackjack::Clubs );
 
@@ -38,7 +37,7 @@ class CardTest : public CppUnit::TestCase
 
 			//Verify the hand without cards.
 			CPPUNIT_ASSERT( h.getNumCards() == 0 );
-			
+
 			//Add a card.
 			h.addCard( Blackjack::Two, Blackjack::Clubs );
 
@@ -48,7 +47,7 @@ class CardTest : public CppUnit::TestCase
 			CPPUNIT_ASSERT( h.getCard(0).getSuit() == Blackjack::Clubs );
 			CPPUNIT_ASSERT( h.getCard(0).getPoints() == 2 );
 			CPPUNIT_ASSERT( h.getCard(0).isAce() == false );
-			
+
 			//Add another card.
 			h.addCard( Blackjack::Ace, Blackjack::Hearts );
 
@@ -58,6 +57,31 @@ class CardTest : public CppUnit::TestCase
 			CPPUNIT_ASSERT( h.getCard(1).getSuit() == Blackjack::Hearts );
 			CPPUNIT_ASSERT( h.getCard(1).getPoints() == 11 );
 			CPPUNIT_ASSERT( h.getCard(1).isAce() == true );
+		}
+
+		void testClearHand()
+		{//Basic test of creating a hand.
+			//Set up the hand without cards.
+			Blackjack::Hand h;
+
+			//Verify the hand without cards.
+			CPPUNIT_ASSERT( h.getNumCards() == 0 );
+
+			//Add a card.
+			h.addCard( Blackjack::Two, Blackjack::Clubs );
+
+			//Verify the values.
+			CPPUNIT_ASSERT( h.getNumCards() == 1 );
+			CPPUNIT_ASSERT( h.getCard(0).getRank() == Blackjack::Two );
+			CPPUNIT_ASSERT( h.getCard(0).getSuit() == Blackjack::Clubs );
+			CPPUNIT_ASSERT( h.getCard(0).getPoints() == 2 );
+			CPPUNIT_ASSERT( h.getCard(0).isAce() == false );
+
+			//Clear the hand.
+			h.clearCards();
+
+			//Verify the hand's cleared.
+			CPPUNIT_ASSERT( h.getNumCards() == 0 );
 		}
 
 		//Create the test suite using CPPUnit macros.
