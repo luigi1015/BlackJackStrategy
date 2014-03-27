@@ -30,6 +30,36 @@ class CardTest : public CppUnit::TestCase
 			CPPUNIT_ASSERT( h.getCard(0).isAce() == false );
 		}
 
+		void testChangeHand()
+		{//Basic test of creating a hand.
+			//Set up the hand without cards.
+			Blackjack::Hand h;
+
+			//Verify the hand without cards.
+			CPPUNIT_ASSERT( h.getNumCards() == 0 );
+
+			//Add a card.
+			h.addCard( Blackjack::Two, Blackjack::Clubs );
+
+			//Verify the values.
+			CPPUNIT_ASSERT( h.getNumCards() == 1 );
+			CPPUNIT_ASSERT( h.getCard(0).getRank() == Blackjack::Two );
+			CPPUNIT_ASSERT( h.getCard(0).getSuit() == Blackjack::Clubs );
+			CPPUNIT_ASSERT( h.getCard(0).getPoints() == 2 );
+			CPPUNIT_ASSERT( h.getCard(0).isAce() == false );
+
+			//Change a card.
+			h.getCard(0).setRank( Blackjack::Three );
+			h.getCard(0).setSuit( Blackjack::Diamonds );
+
+			//Verify the new values.
+			CPPUNIT_ASSERT( h.getNumCards() == 1 );
+			CPPUNIT_ASSERT( h.getCard(0).getRank() == Blackjack::Three );
+			CPPUNIT_ASSERT( h.getCard(0).getSuit() == Blackjack::Diamonds );
+			CPPUNIT_ASSERT( h.getCard(0).getPoints() == 3 );
+			CPPUNIT_ASSERT( h.getCard(0).isAce() == false );
+		}
+
 		void testAddCardToHand()
 		{//Basic test of creating a hand.
 			//Set up the hand without cards.
@@ -88,6 +118,8 @@ class CardTest : public CppUnit::TestCase
 		CPPUNIT_TEST_SUITE( CardTest );
 		CPPUNIT_TEST( testCreateHand );
 		CPPUNIT_TEST( testAddCardToHand );
+		CPPUNIT_TEST( testChangeHand );
+		CPPUNIT_TEST( testClearHand );
 		CPPUNIT_TEST_SUITE_END( );
 };
 
