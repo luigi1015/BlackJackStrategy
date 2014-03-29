@@ -4,6 +4,8 @@
 #include <cppunit/extensions/HelperMacros.h>
 #include <iostream>
 #include <vector>
+#include <sstream>
+#include <string>
 #include "Card.h"
 
 class CardTest : public CppUnit::TestCase 
@@ -13,7 +15,7 @@ class CardTest : public CppUnit::TestCase
 	public:
 		void testCreateCard()
 		{//Basic test of creating a card.
-			//Set up the vertex.
+			//Set up the card.
 			Blackjack::Card c(Blackjack::Two, Blackjack::Clubs);
 
 			//Verify the values.
@@ -229,7 +231,7 @@ class CardTest : public CppUnit::TestCase
 
 		void testChangeCard()
 		{//Test changing the card values.
-			//Set up the vertex.
+			//Set up the card.
 			Blackjack::Card c(Blackjack::Two, Blackjack::Clubs);
 
 			//Verify the initial values.
@@ -257,11 +259,24 @@ class CardTest : public CppUnit::TestCase
 			CPPUNIT_ASSERT( c.isAce() == true );
 		}
 
+		void testOutputCard()
+		{//Test outputing the card as a string.
+			//Set up the card.
+			Blackjack::Card c(Blackjack::Two, Blackjack::Clubs);
+			std::stringstream cardOutput;
+
+			cardOutput << c;
+
+			//Verify the initial values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Two of Clubs") == 0 );
+		}
+
 		//Create the test suite using CPPUnit macros.
 		CPPUNIT_TEST_SUITE( CardTest );
 		CPPUNIT_TEST( testCreateCard );
 		CPPUNIT_TEST( testCreateAllCardCombinations );
 		CPPUNIT_TEST( testChangeCard );
+		CPPUNIT_TEST( testOutputCard );
 		CPPUNIT_TEST_SUITE_END( );
 };
 
