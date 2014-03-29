@@ -89,6 +89,45 @@ class CardTest : public CppUnit::TestCase
 			CPPUNIT_ASSERT( h.getCard(1).isAce() == true );
 		}
 
+		void testRemoveCardFromHand()
+		{//Basic test of creating a hand.
+			//Set up the hand without cards.
+			Blackjack::Hand h;
+			Blackjack::Card removedCard;
+
+			//Verify the hand without cards.
+			CPPUNIT_ASSERT( h.getNumCards() == 0 );
+
+			//Add the cards.
+			h.addCard( Blackjack::Two, Blackjack::Clubs );
+			h.addCard( Blackjack::Ace, Blackjack::Hearts );
+
+			//Verify the values.
+			CPPUNIT_ASSERT( h.getNumCards() == 2 );
+			CPPUNIT_ASSERT( h.getCard(0).getRank() == Blackjack::Two );
+			CPPUNIT_ASSERT( h.getCard(0).getSuit() == Blackjack::Clubs );
+			CPPUNIT_ASSERT( h.getCard(0).getPoints() == 2 );
+			CPPUNIT_ASSERT( h.getCard(0).isAce() == false );
+			CPPUNIT_ASSERT( h.getCard(1).getRank() == Blackjack::Ace );
+			CPPUNIT_ASSERT( h.getCard(1).getSuit() == Blackjack::Hearts );
+			CPPUNIT_ASSERT( h.getCard(1).getPoints() == 11 );
+			CPPUNIT_ASSERT( h.getCard(1).isAce() == true );
+
+			//Add another card.
+			removedCard = h.removeCard( 1 );
+
+			//Verify the correct card was removed.
+			CPPUNIT_ASSERT( h.getNumCards() == 1 );
+			CPPUNIT_ASSERT( h.getCard(0).getRank() == Blackjack::Two );
+			CPPUNIT_ASSERT( h.getCard(0).getSuit() == Blackjack::Clubs );
+			CPPUNIT_ASSERT( h.getCard(0).getPoints() == 2 );
+			CPPUNIT_ASSERT( h.getCard(0).isAce() == false );
+			CPPUNIT_ASSERT( removedCard.getRank() == Blackjack::Ace );
+			CPPUNIT_ASSERT( removedCard.getSuit() == Blackjack::Hearts );
+			CPPUNIT_ASSERT( removedCard.getPoints() == 11 );
+			CPPUNIT_ASSERT( removedCard.isAce() == true );
+		}
+
 		void testClearHand()
 		{//Basic test of creating a hand.
 			//Set up the hand without cards.
@@ -120,6 +159,7 @@ class CardTest : public CppUnit::TestCase
 		CPPUNIT_TEST( testAddCardToHand );
 		CPPUNIT_TEST( testChangeHand );
 		CPPUNIT_TEST( testClearHand );
+		CPPUNIT_TEST( testRemoveCardFromHand );
 		CPPUNIT_TEST_SUITE_END( );
 };
 

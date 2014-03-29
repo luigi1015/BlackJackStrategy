@@ -20,6 +20,7 @@ namespace Blackjack
 			Card& getCard( size_t n );//Get card a location n. n should be between 0 and getNumCards()-1, inclusive.
 			const Card& getCard( size_t n ) const;//Get card a location n. n should be between 0 and getNumCards()-1, inclusive.
 			void clearCards();//Clear all the cards from the hand.
+			Card removeCard( size_t n );//Removes a card from the hand. n should be between 0 and getNumCards()-1, inclusive. Returns a copy of the card that was removed.
 			size_t getMaxPointsAtOrBelow21() const;//Get the max number of points below 21 taking into account that an Ace can be 1 or 11. This is using BlackJack rules. If there isn't any hand below 21, the method will return the lowest of points number above 21.
 			bool isSoft() const;//Returns true if this is a soft hand according to the rules of BlackJack.
 			bool isPair() const;//Returns true if this hand is a pair of equal rank cards.

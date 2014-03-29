@@ -65,6 +65,13 @@ namespace Blackjack
 		cards.clear();
 	}
 
+	Card Hand::removeCard( size_t n )
+	{//Removes a card from the hand. n should be between 0 and getNumCards()-1, inclusive. Returns a copy of the card that was removed.
+		Card removedCard = cards.at( n );
+		cards.erase( cards.begin() + n );
+		return removedCard;
+	}
+
 	size_t Hand::getMaxPointsAtOrBelow21() const
 	{//Get the max number of points below 21 taking into account that an Ace can be 1 or 11. This is using BlackJack rules. If there isn't any hand below 21, the method will return the lowest of points number above 21.
 		size_t sum = 0;//The sum of the points.
