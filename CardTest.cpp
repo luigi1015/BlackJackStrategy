@@ -262,13 +262,473 @@ class CardTest : public CppUnit::TestCase
 		void testOutputCard()
 		{//Test outputing the card as a string.
 			//Set up the card.
-			Blackjack::Card c(Blackjack::Two, Blackjack::Clubs);
+			Blackjack::Card c(Blackjack::Ace, Blackjack::Clubs);
 			std::stringstream cardOutput;
 
+			//Start out with Ace of Clubs.
 			cardOutput << c;
 
-			//Verify the initial values.
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Ace of Clubs") == 0 );
+
+			//Test the Ace of Diamonds
+			cardOutput.str("");
+			c.setRank( Blackjack::Ace );
+			c.setSuit( Blackjack::Diamonds );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Ace of Diamonds") == 0 );
+
+			//Test the Ace of Hearts
+			cardOutput.str("");
+			c.setRank( Blackjack::Ace );
+			c.setSuit( Blackjack::Hearts );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Ace of Hearts") == 0 );
+
+			//Test the Ace of Spades
+			cardOutput.str("");
+			c.setRank( Blackjack::Ace );
+			c.setSuit( Blackjack::Spades );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Ace of Spades") == 0 );
+
+			//Test the Two of Clubs
+			cardOutput.str("");
+			c.setRank( Blackjack::Two );
+			c.setSuit( Blackjack::Clubs );
+			cardOutput << c;
+
+			//Verify the values.
 			CPPUNIT_ASSERT( cardOutput.str().compare("Two of Clubs") == 0 );
+
+			//Test the Two of Diamonds
+			cardOutput.str("");
+			c.setRank( Blackjack::Two );
+			c.setSuit( Blackjack::Diamonds );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Two of Diamonds") == 0 );
+
+			//Test the Two of Hearts
+			cardOutput.str("");
+			c.setRank( Blackjack::Two );
+			c.setSuit( Blackjack::Hearts );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Two of Hearts") == 0 );
+
+			//Test the Two of Spades
+			cardOutput.str("");
+			c.setRank( Blackjack::Two );
+			c.setSuit( Blackjack::Spades );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Two of Spades") == 0 );
+
+			//Test the Three of Clubs
+			cardOutput.str("");
+			c.setRank( Blackjack::Three );
+			c.setSuit( Blackjack::Clubs );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Three of Clubs") == 0 );
+
+			//Test the Three of Diamonds
+			cardOutput.str("");
+			c.setRank( Blackjack::Three );
+			c.setSuit( Blackjack::Diamonds );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Three of Diamonds") == 0 );
+
+			//Test the Three of Hearts
+			cardOutput.str("");
+			c.setRank( Blackjack::Three );
+			c.setSuit( Blackjack::Hearts );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Three of Hearts") == 0 );
+
+			//Test the Three of Spades
+			cardOutput.str("");
+			c.setRank( Blackjack::Three );
+			c.setSuit( Blackjack::Spades );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Three of Spades") == 0 );
+
+			//Test the Four of Clubs
+			cardOutput.str("");
+			c.setRank( Blackjack::Four );
+			c.setSuit( Blackjack::Clubs );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Four of Clubs") == 0 );
+
+			//Test the Four of Diamonds
+			cardOutput.str("");
+			c.setRank( Blackjack::Four );
+			c.setSuit( Blackjack::Diamonds );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Four of Diamonds") == 0 );
+
+			//Test the Four of Hearts
+			cardOutput.str("");
+			c.setRank( Blackjack::Four );
+			c.setSuit( Blackjack::Hearts );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Four of Hearts") == 0 );
+
+			//Test the Four of Spades
+			cardOutput.str("");
+			c.setRank( Blackjack::Four );
+			c.setSuit( Blackjack::Spades );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Four of Spades") == 0 );
+
+			//Test the Five of Clubs
+			cardOutput.str("");
+			c.setRank( Blackjack::Five );
+			c.setSuit( Blackjack::Clubs );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Five of Clubs") == 0 );
+
+			//Test the Five of Diamonds
+			cardOutput.str("");
+			c.setRank( Blackjack::Five );
+			c.setSuit( Blackjack::Diamonds );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Five of Diamonds") == 0 );
+
+			//Test the Five of Hearts
+			cardOutput.str("");
+			c.setRank( Blackjack::Five );
+			c.setSuit( Blackjack::Hearts );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Five of Hearts") == 0 );
+
+			//Test the Five of Spades
+			cardOutput.str("");
+			c.setRank( Blackjack::Five );
+			c.setSuit( Blackjack::Spades );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Five of Spades") == 0 );
+
+			//Test the Six of Clubs
+			cardOutput.str("");
+			c.setRank( Blackjack::Six );
+			c.setSuit( Blackjack::Clubs );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Six of Clubs") == 0 );
+
+			//Test the Six of Diamonds
+			cardOutput.str("");
+			c.setRank( Blackjack::Six );
+			c.setSuit( Blackjack::Diamonds );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Six of Diamonds") == 0 );
+
+			//Test the Six of Hearts
+			cardOutput.str("");
+			c.setRank( Blackjack::Six );
+			c.setSuit( Blackjack::Hearts );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Six of Hearts") == 0 );
+
+			//Test the Six of Spades
+			cardOutput.str("");
+			c.setRank( Blackjack::Six );
+			c.setSuit( Blackjack::Spades );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Six of Spades") == 0 );
+
+			//Test the Seven of Clubs
+			cardOutput.str("");
+			c.setRank( Blackjack::Seven );
+			c.setSuit( Blackjack::Clubs );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Seven of Clubs") == 0 );
+
+			//Test the Seven of Diamonds
+			cardOutput.str("");
+			c.setRank( Blackjack::Seven );
+			c.setSuit( Blackjack::Diamonds );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Seven of Diamonds") == 0 );
+
+			//Test the Seven of Hearts
+			cardOutput.str("");
+			c.setRank( Blackjack::Seven );
+			c.setSuit( Blackjack::Hearts );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Seven of Hearts") == 0 );
+
+			//Test the Seven of Spades
+			cardOutput.str("");
+			c.setRank( Blackjack::Seven );
+			c.setSuit( Blackjack::Spades );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Seven of Spades") == 0 );
+
+			//Test the Eight of Clubs
+			cardOutput.str("");
+			c.setRank( Blackjack::Eight );
+			c.setSuit( Blackjack::Clubs );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Eight of Clubs") == 0 );
+
+			//Test the Eight of Diamonds
+			cardOutput.str("");
+			c.setRank( Blackjack::Eight );
+			c.setSuit( Blackjack::Diamonds );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Eight of Diamonds") == 0 );
+
+			//Test the Eight of Hearts
+			cardOutput.str("");
+			c.setRank( Blackjack::Eight );
+			c.setSuit( Blackjack::Hearts );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Eight of Hearts") == 0 );
+
+			//Test the Eight of Spades
+			cardOutput.str("");
+			c.setRank( Blackjack::Eight );
+			c.setSuit( Blackjack::Spades );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Eight of Spades") == 0 );
+
+			//Test the Nine of Clubs
+			cardOutput.str("");
+			c.setRank( Blackjack::Nine );
+			c.setSuit( Blackjack::Clubs );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Nine of Clubs") == 0 );
+
+			//Test the Nine of Diamonds
+			cardOutput.str("");
+			c.setRank( Blackjack::Nine );
+			c.setSuit( Blackjack::Diamonds );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Nine of Diamonds") == 0 );
+
+			//Test the Nine of Hearts
+			cardOutput.str("");
+			c.setRank( Blackjack::Nine );
+			c.setSuit( Blackjack::Hearts );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Nine of Hearts") == 0 );
+
+			//Test the Nine of Spades
+			cardOutput.str("");
+			c.setRank( Blackjack::Nine );
+			c.setSuit( Blackjack::Spades );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Nine of Spades") == 0 );
+
+			//Test the Ten of Clubs
+			cardOutput.str("");
+			c.setRank( Blackjack::Ten );
+			c.setSuit( Blackjack::Clubs );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Ten of Clubs") == 0 );
+
+			//Test the Ten of Diamonds
+			cardOutput.str("");
+			c.setRank( Blackjack::Ten );
+			c.setSuit( Blackjack::Diamonds );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Ten of Diamonds") == 0 );
+
+			//Test the Ten of Hearts
+			cardOutput.str("");
+			c.setRank( Blackjack::Ten );
+			c.setSuit( Blackjack::Hearts );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Ten of Hearts") == 0 );
+
+			//Test the Ten of Spades
+			cardOutput.str("");
+			c.setRank( Blackjack::Ten );
+			c.setSuit( Blackjack::Spades );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Ten of Spades") == 0 );
+
+			//Test the Jack of Clubs
+			cardOutput.str("");
+			c.setRank( Blackjack::Jack );
+			c.setSuit( Blackjack::Clubs );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Jack of Clubs") == 0 );
+
+			//Test the Jack of Diamonds
+			cardOutput.str("");
+			c.setRank( Blackjack::Jack );
+			c.setSuit( Blackjack::Diamonds );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Jack of Diamonds") == 0 );
+
+			//Test the Jack of Hearts
+			cardOutput.str("");
+			c.setRank( Blackjack::Jack );
+			c.setSuit( Blackjack::Hearts );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Jack of Hearts") == 0 );
+
+			//Test the Jack of Spades
+			cardOutput.str("");
+			c.setRank( Blackjack::Jack );
+			c.setSuit( Blackjack::Spades );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Jack of Spades") == 0 );
+
+			//Test the Queen of Clubs
+			cardOutput.str("");
+			c.setRank( Blackjack::Queen );
+			c.setSuit( Blackjack::Clubs );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Queen of Clubs") == 0 );
+
+			//Test the Queen of Diamonds
+			cardOutput.str("");
+			c.setRank( Blackjack::Queen );
+			c.setSuit( Blackjack::Diamonds );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Queen of Diamonds") == 0 );
+
+			//Test the Queen of Hearts
+			cardOutput.str("");
+			c.setRank( Blackjack::Queen );
+			c.setSuit( Blackjack::Hearts );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Queen of Hearts") == 0 );
+
+			//Test the Queen of Spades
+			cardOutput.str("");
+			c.setRank( Blackjack::Queen );
+			c.setSuit( Blackjack::Spades );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("Queen of Spades") == 0 );
+
+			//Test the King of Clubs
+			cardOutput.str("");
+			c.setRank( Blackjack::King );
+			c.setSuit( Blackjack::Clubs );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("King of Clubs") == 0 );
+
+			//Test the King of Diamonds
+			cardOutput.str("");
+			c.setRank( Blackjack::King );
+			c.setSuit( Blackjack::Diamonds );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("King of Diamonds") == 0 );
+
+			//Test the King of Hearts
+			cardOutput.str("");
+			c.setRank( Blackjack::King );
+			c.setSuit( Blackjack::Hearts );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("King of Hearts") == 0 );
+
+			//Test the King of Spades
+			cardOutput.str("");
+			c.setRank( Blackjack::King );
+			c.setSuit( Blackjack::Spades );
+			cardOutput << c;
+
+			//Verify the values.
+			CPPUNIT_ASSERT( cardOutput.str().compare("King of Spades") == 0 );
 		}
 
 		//Create the test suite using CPPUnit macros.
