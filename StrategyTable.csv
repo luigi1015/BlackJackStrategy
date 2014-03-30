@@ -1,0 +1,34 @@
+,Dealer's First Card,,,,,,,,,
+Your Hand,2,3,4,5,6,7,8,9,10,A
+>17,Stand,Stand,Stand,Stand,Stand,Stand,Stand,Stand,Stand,Stand
+17,Stand,Stand,Stand,Stand,Stand,Stand,Stand,Stand,Stand,Stand
+16,Stand,Stand,Stand,Stand,Stand,Hit,Hit,Hit,Hit,Hit
+15,Stand,Stand,Stand,Stand,Stand,Hit,Hit,Hit,Hit,Hit
+14,Stand,Stand,Stand,Stand,Stand,Hit,Hit,Hit,Hit,Hit
+13,Stand,Stand,Stand,Stand,Stand,Hit,Hit,Hit,Hit,Hit
+12,Hit,Hit,Stand,Stand,Stand,Hit,Hit,Hit,Hit,Hit
+11,Double,Double,Double,Double,Double,Double,Double,Double,Double,Hit
+10,Double,Double,Double,Double,Double,Double,Double,Double,Hit,Hit
+9,Hit,Double,Double,Double,Double,Hit,Hit,Hit,Hit,Hit
+8,Hit,Hit,Hit,Hit,Hit,Hit,Hit,Hit,Hit,Hit
+7,Hit,Hit,Hit,Hit,Hit,Hit,Hit,Hit,Hit,Hit
+6,Hit,Hit,Hit,Hit,Hit,Hit,Hit,Hit,Hit,Hit
+5,Hit,Hit,Hit,Hit,Hit,Hit,Hit,Hit,Hit,Hit
+Soft 20,Stand,Stand,Stand,Stand,Stand,Stand,Stand,Stand,Stand,Stand
+Soft 19,Stand,Stand,Stand,Stand,Stand,Stand,Stand,Stand,Stand,Stand
+Soft 18,Stand,Double,Double,Double,Double,Stand,Stand,Hit,Hit,Hit
+Soft 17,Hit,Double,Double,Double,Double,Hit,Hit,Hit,Hit,Hit
+Soft 16,Hit,Hit,Double,Double,Double,Hit,Hit,Hit,Hit,Hit
+Soft 15,Hit,Hit,Double,Double,Double,Hit,Hit,Hit,Hit,Hit
+Soft 14,Hit,Hit,Hit,Double,Double,Hit,Hit,Hit,Hit,Hit
+Soft 13,Hit,Hit,Hit,Double,Double,Hit,Hit,Hit,Hit,Hit
+Pair A,Split,Split,Split,Split,Split,Split,Split,Split,Split,Split
+Pair 10,Stand,Stand,Stand,Stand,Stand,Stand,Stand,Stand,Stand,Stand
+Pair 9,Split,Split,Split,Split,Split,Stand,Split,Split,Stand,Stand
+Pair 8,Split,Split,Split,Split,Split,Split,Split,Split,Split,Split
+Pair 7,Split,Split,Split,Split,Split,Split,Hit,Hit,Hit,Hit
+Pair 6,Split,Split,Split,Split,Split,Hit,Hit,Hit,Hit,Hit
+Pair 5,Double,Double,Double,Double,Double,Double,Double,Double,Hit,Hit
+Pair 4,Hit,Hit,Hit,Split,Split,Hit,Hit,Hit,Hit,Hit
+Pair 3,Split,Split,Split,Split,Split,Split,Hit,Hit,Hit,Hit
+Pair 2,Split,Split,Split,Split,Split,Split,Hit,Hit,Hit,Hit
