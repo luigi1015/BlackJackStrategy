@@ -161,6 +161,11 @@ namespace Blackjack
 		return (getMaxPointsAtOrBelow21() == 21);
 	}
 
+	bool Hand::canSplit() const
+	{//Returns true if the hand meets the requirements of a split according to the rules of BlackJack.
+		return ( (getNumCards() == 2) && (cards.at(0).getRank() == cards.at(1).getRank()) );
+	}
+
 	std::ostream& operator<<(std::ostream &out, const Hand &h)
 	{//For stream output.
 		out << "There are " << h.getNumCards() << " cards." << std::endl << "Cards: " << std::endl;

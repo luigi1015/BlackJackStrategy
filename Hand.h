@@ -26,6 +26,7 @@ namespace Blackjack
 			bool isPair() const;//Returns true if this hand is a pair of equal rank cards.
 			bool isBust() const;//Returns if this is a bust according to the rules of BlackJack. Basically it's a bust if the minimum number of points is above 21.
 			bool isBlackJack() const;//Returns true if the points add up to 21 according to the rules of BlackJack.
+			bool canSplit() const;//Returns true if the hand meets the requirements of a split according to the rules of BlackJack.
 			friend std::ostream& operator<<(std::ostream &out, const Hand &h);//For stream output.
 	};
 }

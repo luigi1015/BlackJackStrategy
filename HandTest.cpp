@@ -153,6 +153,28 @@ class CardTest : public CppUnit::TestCase
 			CPPUNIT_ASSERT( h.getNumCards() == 0 );
 		}
 
+		void testSplitHand()
+		{//Basic test of the canSplit() method.
+			//Set up the hand without cards.
+			Blackjack::Hand h;
+
+			//Verify the hand without cards.
+			CPPUNIT_ASSERT( !(h.canSplit()) );
+
+			//Add a card.
+			h.addCard( Blackjack::Two, Blackjack::Clubs );
+			h.addCard( Blackjack::Two, Blackjack::Hearts );
+
+			//Verify the values.
+			CPPUNIT_ASSERT( h.canSplit() );
+
+			//Clear the hand.
+			h.getCard(0).setRank( Blackjack::Three );;
+
+			//Verify the hand's cleared.
+			CPPUNIT_ASSERT( !(h.canSplit()) );
+		}
+
 		//Create the test suite using CPPUnit macros.
 		CPPUNIT_TEST_SUITE( CardTest );
 		CPPUNIT_TEST( testCreateHand );
@@ -160,6 +182,7 @@ class CardTest : public CppUnit::TestCase
 		CPPUNIT_TEST( testChangeHand );
 		CPPUNIT_TEST( testClearHand );
 		CPPUNIT_TEST( testRemoveCardFromHand );
+		CPPUNIT_TEST( testSplitHand );
 		CPPUNIT_TEST_SUITE_END( );
 };
 

@@ -8,6 +8,7 @@ namespace Blackjack
 	class Player
 	{//A Blackjack player.
 		private:
+			Hand hand;
 
 		public:
 			Player();//Default Cunstructor.
