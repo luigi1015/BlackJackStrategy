@@ -12,6 +12,7 @@ namespace Blackjack
 
 		public:
 			HandsIterator( std::vector<Hand>& hands );
+			HandsIterator( Player& player );
 			~HandsIterator();
 			void first();
 			void next();
