@@ -28,4 +28,9 @@ namespace Blackjack
 	{//Returns the number of hands the player currently has.
 		return hands.size();
 	}
+
+	Hand& getHand( size_t n )
+	{//Returns the hand at location n. n should be between 0 and numHands()-1, inclusive.
+		return hands.at(n);
+	}
 }
