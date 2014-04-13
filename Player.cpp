@@ -29,16 +29,16 @@ namespace Blackjack
 		return hands.size();
 	}
 
-	Hand& getHand( size_t n )
+	Hand& Player::getHand( size_t n )
 	{//Returns the hand at location n. n should be between 0 and numHands()-1, inclusive.
 		return hands.at(n);
 	}
 
-	std::vector<Hand>& getHands()
+	std::vector<Hand>& Player::getHands()
 	{//Returns the hands as a vector. This is mainly for use with HandsIterator.
 	}
 
-	void split( size_t n )
+	void Player::split( size_t n )
 	{//Splits the hand at index n. Throws an exception if the hand can't be split according to the rules of blackjack.
 	}
 }
