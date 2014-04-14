@@ -43,6 +43,10 @@ namespace Blackjack
 	}
 
 	void Player::split( size_t n )
-	{//Splits the hand at index n. Throws an exception if the hand can't be split according to the rules of blackjack.
+	{//Splits the hand at index n. Throws an exception if the hand can't be split according to the rules of blackjack. n should be between 0 and numHands()-1, inclusive.
+	}
+
+	void Player::addHand( Hand newHand )
+	{//Add a hand to the end of the list;
 	}
 }
