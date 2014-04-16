@@ -53,4 +53,8 @@ namespace Blackjack
 	void Player::addHand( Hand newHand, size_t n )
 	{//Add a hand at location n. n should be between 0 and numHands()-1, inclusive.
 	}
+
+	void clearHands()
+	{//Remove all the hands.
+	}
 }
