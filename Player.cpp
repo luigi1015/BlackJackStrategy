@@ -56,5 +56,6 @@ namespace Blackjack
 
 	void clearHands()
 	{//Remove all the hands.
+		hands.clear();
 	}
 }
