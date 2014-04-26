@@ -6,7 +6,7 @@
 #include <vector>
 #include "Hand.h"
 
-class CardTest : public CppUnit::TestCase 
+class HandTest : public CppUnit::TestCase 
 {
 	private:
 
@@ -176,7 +176,7 @@ class CardTest : public CppUnit::TestCase
 		}
 
 		//Create the test suite using CPPUnit macros.
-		CPPUNIT_TEST_SUITE( CardTest );
+		CPPUNIT_TEST_SUITE( HandTest );
 		CPPUNIT_TEST( testCreateHand );
 		CPPUNIT_TEST( testAddCardToHand );
 		CPPUNIT_TEST( testChangeHand );
@@ -188,7 +188,7 @@ class CardTest : public CppUnit::TestCase
 
 int main()
 {
-	CPPUNIT_TEST_SUITE_REGISTRATION( CardTest );
+	CPPUNIT_TEST_SUITE_REGISTRATION( HandTest );
 	CppUnit::TextUi::TestRunner runner;
 	CppUnit::TestFactoryRegistry &registry = CppUnit::TestFactoryRegistry::getRegistry( );
 	runner.addTest( registry.makeTest( ) );
