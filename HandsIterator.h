@@ -18,6 +18,9 @@ namespace Blackjack
 			void next();
 			bool isDone() const;
 			Hand currentItem() const;
+
+		protected:
+			Iterator();
 	};
 }
 
