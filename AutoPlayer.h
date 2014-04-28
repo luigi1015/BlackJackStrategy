@@ -2,6 +2,7 @@
 #define AutoPlayer_h
 
 #include "Hand.h"
+#include “Playerr.h”
 
 namespace Blackjack
 {
