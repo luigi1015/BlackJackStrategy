@@ -1,6 +1,7 @@
 #ifndef Dealer_h
 #define Dealer_h
 
+#include <vector>
 #include "Hand.h"
 
 namespace Blackjack
@@ -11,6 +12,7 @@ namespace Blackjack
 
 		public:
 			Dealer();//Default Cunstructor.
+			void deal();//Deal cards to players.
 	};
 }
 
