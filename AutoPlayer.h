@@ -2,11 +2,11 @@
 #define AutoPlayer_h
 
 #include "Hand.h"
-#include “Playerr.h”
+#include “Player.h”
 
 namespace Blackjack
 {
-	class AutoPlayer
+	class AutoPlayer: public Player
 	{//A Blackjack player that automatically plays without user input.
 		private:
 

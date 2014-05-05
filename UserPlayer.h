@@ -5,7 +5,7 @@
 
 namespace Blackjack
 {
-	class UserPlayer
+	class UserPlayer: public Player
 	{//A Blackjack player that plays with user input.
 		private:
 
