@@ -2,12 +2,15 @@
 #define HandsItearator_h
 
 #include "Hand.h"
+#include "Player.h"
 #include <vector>
 
 namespace Blackjack
 {
 	class HandsIterator
 	{//A iterator to iterate over the player's hands. If the hands change while the iterator is in the middle of iterating, unexpected results may occur, but care is taken to keep the iterator working if hands are added after the current hand. 
+		friend class Player;
+
 		private:
 			Player& player;//The player with the hands to iterate over.
 			size_t position;//The current position among the hands. Starts at 0 and goes to player.numHands() - 1.
