@@ -10,13 +10,15 @@ namespace Blackjack
 	class HandsIterator
 	{//A iterator to iterate over the player's hands. If the hands change while the iterator is in the middle of iterating, unexpected results may occur, but care is taken to keep the iterator working if hands are added after the current hand. 
 		private:
-			Player& player;//The player with the hands to iterate over.
+			//Player& player;//The player with the hands to iterate over.
+			HandCollection& collection;//The set of hands the player is using.
 			size_t position;//The current position among the hands. Starts at 0 and goes to player.numHands() - 1.
 			size_t getNumHands() const;//Get the current number of hands.
 
 		public:
 			//HandsIterator( std::vector<Hand>& hands );
-			HandsIterator( Player& newPlayer );//Constructor with the player.
+			//HandsIterator( Player& newPlayer );//Constructor with the player.
+			HandsIterator( HandCollection* newCollection );//Constructor with the collection of hands.
 			//~HandsIterator();
 			void first();//Move to the first hand.
 			void next();//Move to the next hand.
@@ -32,8 +34,9 @@ namespace Blackjack
 
 namespace Blackjack
 {
-	HandsIterator::HandsIterator( Player* newPlayer ): player( *newPlayer )
-	{//Constructor with the player.
+	//HandsIterator::HandsIterator( Player* newPlayer ): player( *newPlayer )
+	HandsIterator::HandsIterator( HandCollection* newCollection ): collection( *newCollection )
+	{//Constructor with the collection of hands.
 		//player = newPlayer;
 		first();
 	}

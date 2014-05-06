@@ -1,8 +1,9 @@
 #ifndef HandsItearator_h
 #define HandsItearator_h
 
-#include "Hand.h"
+//#include "Hand.h"
 //#include "Player.h"
+#include "HandCollection.h"
 #include <vector>
 
 namespace Blackjack
@@ -12,13 +13,14 @@ namespace Blackjack
 		friend class Player;
 
 		private:
-			Player& player;//The player with the hands to iterate over.
+			//Player& player;//The player with the hands to iterate over.
+			HandCollection& collection;//The set of hands the player is using.
 			size_t position;//The current position among the hands. Starts at 0 and goes to player.numHands() - 1.
 			size_t getNumHands() const;//Get the current number of hands.
 
 		public:
 			//HandsIterator( std::vector<Hand>& hands );
-			HandsIterator( Player* newPlayer );//Constructor with the player.
+			HandsIterator( HandCollection* newCollection );//Constructor with the collection of hands.
 			//~HandsIterator();
 			void first();//Move to the first hand.
 			void next();//Move to the next hand.

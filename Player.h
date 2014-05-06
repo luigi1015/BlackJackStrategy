@@ -1,7 +1,7 @@
 #ifndef Player_h
 #define Player_h
 
-#include "Hand.h"
+//#include "Hand.h"
 #include "HandsIterator.h"
 #include <vector>
 
