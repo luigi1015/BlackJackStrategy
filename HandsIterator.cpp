@@ -32,9 +32,9 @@ namespace Blackjack
 
 namespace Blackjack
 {
-	HandsIterator::HandsIterator( Player& newPlayer )
+	HandsIterator::HandsIterator( Player* newPlayer ): player( *newPlayer )
 	{//Constructor with the player.
-		player = newPlayer;
+		//player = newPlayer;
 		first();
 	}
 
@@ -70,7 +70,7 @@ namespace Blackjack
 		}
 		else
 		{
-			return getHand( position );
+			return player.getHand( position );
 		}
 	}
 }

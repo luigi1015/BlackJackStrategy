@@ -4,7 +4,7 @@
 #include <cppunit/extensions/HelperMacros.h>
 #include <iostream>
 #include <vector>
-#include "Hand.h"
+//#include "Hand.h"
 #include "HandsIterator.h"
 
 class HandsIteratorTest : public CppUnit::TestCase 
@@ -14,10 +14,15 @@ class HandsIteratorTest : public CppUnit::TestCase
 	public:
 		void testIterateHand()
 		{//Basic test of creating a hand.
-			//Set up the hand.
-			Blackjack::Hand h;
-			h.addCard( Blackjack::Two, Blackjack::Clubs );
-			h.addCard( Blackjack::Three, Blackjack::Hearts );
+			//Set up the player.
+			Blackjack::Hand firstHand, secondHand;
+			Blackjack::Player player;
+			firstHand.addCard( Blackjack::Two, Blackjack::Clubs );
+			firstHand.addCard( Blackjack::Three, Blackjack::Hearts );
+			secondHand.addCard( Blackjack::Five, Blackjack::Hearts );
+			secondHand.addCard( Blackjack::Jack, Blackjack::Diamonds );
+			player.addHand( firstHand );
+			player.addHand( secondHand );
 
 			//Verify the values.
 			CPPUNIT_ASSERT( h.getNumCards() == 2 );
@@ -31,8 +36,37 @@ class HandsIteratorTest : public CppUnit::TestCase
 			CPPUNIT_ASSERT( h.getCard(1).isAce() == false );
 
 			//Iterate through the values.
-			//TODO: Finish this
-			CPPUNIT_ASSERT( 1 == 0 );
+			Blackjack::HandsIterator handsIt( player );
+
+			//First value
+			handsIt.first();
+			CPPUNIT_ASSERT( handsIt.currentHand().getNumCards() == 2 );
+			CPPUNIT_ASSERT( handsIt.currentHand().getCard(0).getRank() == Blackjack::Two );
+			CPPUNIT_ASSERT( handsIt.currentHand().getCard(0).getSuit() == Blackjack::Clubs );
+			CPPUNIT_ASSERT( handsIt.currentHand().getCard(0).getPoints() == 2 );
+			CPPUNIT_ASSERT( handsIt.currentHand().getCard(0).isAce() == false );
+			CPPUNIT_ASSERT( handsIt.currentHand().getCard(1).getRank() == Blackjack::Three );
+			CPPUNIT_ASSERT( handsIt.currentHand().getCard(1).getSuit() == Blackjack::Hearts );
+			CPPUNIT_ASSERT( handsIt.currentHand().getCard(1).getPoints() == 3 );
+			CPPUNIT_ASSERT( handsIt.currentHand().getCard(1).isAce() == false );
+			CPPUNIT_ASSERT( handsIt.isDone() == false );
+
+			//Second value
+			handsIt.next();
+			CPPUNIT_ASSERT( handsIt.currentHand().getNumCards() == 2 );
+			CPPUNIT_ASSERT( handsIt.currentHand().getCard(0).getRank() == Blackjack::Two );
+			CPPUNIT_ASSERT( handsIt.currentHand().getCard(0).getSuit() == Blackjack::Clubs );
+			CPPUNIT_ASSERT( handsIt.currentHand().getCard(0).getPoints() == 2 );
+			CPPUNIT_ASSERT( handsIt.currentHand().getCard(0).isAce() == false );
+			CPPUNIT_ASSERT( handsIt.currentHand().getCard(1).getRank() == Blackjack::Three );
+			CPPUNIT_ASSERT( handsIt.currentHand().getCard(1).getSuit() == Blackjack::Hearts );
+			CPPUNIT_ASSERT( handsIt.currentHand().getCard(1).getPoints() == 3 );
+			CPPUNIT_ASSERT( handsIt.currentHand().getCard(1).isAce() == false );
+			CPPUNIT_ASSERT( handsIt.isDone() == false );
+
+			//Go past second/last value.
+			handsIt.next();
+			CPPUNIT_ASSERT( handsIt.isDone() == true );
 		}
 
 		//Create the test suite using CPPUnit macros.

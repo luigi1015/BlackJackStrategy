@@ -2,7 +2,7 @@
 #define HandsItearator_h
 
 #include "Hand.h"
-#include "Player.h"
+//#include "Player.h"
 #include <vector>
 
 namespace Blackjack
@@ -18,7 +18,7 @@ namespace Blackjack
 
 		public:
 			//HandsIterator( std::vector<Hand>& hands );
-			HandsIterator( Player& newPlayer );//Constructor with the player.
+			HandsIterator( Player* newPlayer );//Constructor with the player.
 			//~HandsIterator();
 			void first();//Move to the first hand.
 			void next();//Move to the next hand.
@@ -26,7 +26,7 @@ namespace Blackjack
 			Hand& currentHand();//Return the current hand.
 
 		protected:
-			Iterator();//Default constructor. It's protected so it won't be called by an unauthorized class.
+			HandsIterator();//Default constructor. It's protected so it won't be called by an unauthorized class.
 	};
 }
 

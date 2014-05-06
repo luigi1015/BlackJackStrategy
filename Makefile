@@ -23,4 +23,4 @@ HandsIteratorTest: HandsIterator.h HandsIterator.cpp HandsIterator.o HandsIterat
 	g++ -g -Wall -o HandsIteratorTest HandsIteratorTest.cpp HandsIterator.o Hand.o Card.o -lcppunit
 
 clean:
-	rm *.o *~ *.gch CardTest HandTest HandsIterator
+	rm *.o *~ *.gch CardTest HandTest HandsIteratorTest
