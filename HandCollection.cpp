@@ -1,4 +1,8 @@
+#include <stdexcept>
+#include <sstream> 
+#include <iostream>
 #include "HandCollection.h"
+
 /*
 namespace Blackjack
 {
@@ -43,10 +47,23 @@ namespace Blackjack
 
 	void HandCollection::addHand( Hand newHand )
 	{//Add a hand to the end of the list;
+		hands.push_back( newHand );
 	}
 
 	void HandCollection::addHand( Hand newHand, size_t n )
 	{//Add a hand at location n. n should be between 0 and numHands()-1, inclusive.
+		std::stringstream errorStream;
+
+		if( (n < 0) || (n >= numHands()) )
+		{
+			errorStream << "Trying to add a hand to location " << n << ", which is outside the list of hands. The location should be between 0 and " << (getNumHands() - 1) << ", inclusive.";
+			std::cerr << errorStream.str() << std::endl;
+			throw std::out_of_range( errorStream.str() );
+		}
+		else
+		{
+			hands.insert( hands.begin() + n );
+		}
 	}
 
 	void HandCollection::clearHands()
