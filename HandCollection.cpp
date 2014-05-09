@@ -40,10 +40,12 @@ namespace Blackjack
 		return hands.at(n);
 	}
 
+/*
 	std::vector<Hand>& HandCollection::getHands()
 	{//Returns the hands as a vector. This is mainly for use with HandsIterator.
 		return hands;
 	}
+*/
 
 	void HandCollection::addHand( Hand newHand )
 	{//Add a hand to the end of the list;
@@ -56,13 +58,13 @@ namespace Blackjack
 
 		if( (n < 0) || (n >= numHands()) )
 		{
-			errorStream << "Trying to add a hand to location " << n << ", which is outside the list of hands. The location should be between 0 and " << (getNumHands() - 1) << ", inclusive.";
+			errorStream << "Trying to add a hand to location " << n << ", which is outside the list of hands. The location should be between 0 and " << (numHands() - 1) << ", inclusive.";
 			std::cerr << errorStream.str() << std::endl;
 			throw std::out_of_range( errorStream.str() );
 		}
 		else
 		{
-			hands.insert( hands.begin() + n );
+			hands.insert( (hands.begin() + n), newHand );
 		}
 	}
 

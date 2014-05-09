@@ -6,6 +6,9 @@
 #include <vector>
 //#include "Hand.h"
 #include "HandsIterator.h"
+//#include "HandCollection.h"
+#include "Player.h"
+//#include "HandCollection.h"
 
 class HandsIteratorTest : public CppUnit::TestCase 
 {
@@ -21,9 +24,10 @@ class HandsIteratorTest : public CppUnit::TestCase
 			firstHand.addCard( Blackjack::Three, Blackjack::Hearts );
 			secondHand.addCard( Blackjack::Five, Blackjack::Hearts );
 			secondHand.addCard( Blackjack::Jack, Blackjack::Diamonds );
-			player.addHand( firstHand );
-			player.addHand( secondHand );
+			player.getHands().addHand( firstHand );
+			player.getHands().addHand( secondHand );
 
+/*
 			//Verify the values.
 			CPPUNIT_ASSERT( h.getNumCards() == 2 );
 			CPPUNIT_ASSERT( h.getCard(0).getRank() == Blackjack::Two );
@@ -34,9 +38,10 @@ class HandsIteratorTest : public CppUnit::TestCase
 			CPPUNIT_ASSERT( h.getCard(1).getSuit() == Blackjack::Hearts );
 			CPPUNIT_ASSERT( h.getCard(1).getPoints() == 3 );
 			CPPUNIT_ASSERT( h.getCard(1).isAce() == false );
+*/
 
 			//Iterate through the values.
-			Blackjack::HandsIterator handsIt( player );
+			Blackjack::HandsIterator handsIt( &player.getHands() );
 
 			//First value
 			handsIt.first();
@@ -54,13 +59,13 @@ class HandsIteratorTest : public CppUnit::TestCase
 			//Second value
 			handsIt.next();
 			CPPUNIT_ASSERT( handsIt.currentHand().getNumCards() == 2 );
-			CPPUNIT_ASSERT( handsIt.currentHand().getCard(0).getRank() == Blackjack::Two );
-			CPPUNIT_ASSERT( handsIt.currentHand().getCard(0).getSuit() == Blackjack::Clubs );
-			CPPUNIT_ASSERT( handsIt.currentHand().getCard(0).getPoints() == 2 );
+			CPPUNIT_ASSERT( handsIt.currentHand().getCard(0).getRank() == Blackjack::Five );
+			CPPUNIT_ASSERT( handsIt.currentHand().getCard(0).getSuit() == Blackjack::Hearts );
+			CPPUNIT_ASSERT( handsIt.currentHand().getCard(0).getPoints() == 5 );
 			CPPUNIT_ASSERT( handsIt.currentHand().getCard(0).isAce() == false );
-			CPPUNIT_ASSERT( handsIt.currentHand().getCard(1).getRank() == Blackjack::Three );
-			CPPUNIT_ASSERT( handsIt.currentHand().getCard(1).getSuit() == Blackjack::Hearts );
-			CPPUNIT_ASSERT( handsIt.currentHand().getCard(1).getPoints() == 3 );
+			CPPUNIT_ASSERT( handsIt.currentHand().getCard(1).getRank() == Blackjack::Jack );
+			CPPUNIT_ASSERT( handsIt.currentHand().getCard(1).getSuit() == Blackjack::Diamonds );
+			CPPUNIT_ASSERT( handsIt.currentHand().getCard(1).getPoints() == 10 );
 			CPPUNIT_ASSERT( handsIt.currentHand().getCard(1).isAce() == false );
 			CPPUNIT_ASSERT( handsIt.isDone() == false );
 

@@ -3,6 +3,7 @@
 
 //#include "Hand.h"
 #include "HandsIterator.h"
+//#include "HandCollection.h"
 #include <vector>
 
 namespace Blackjack
@@ -10,18 +11,19 @@ namespace Blackjack
 	class Player
 	{//A Blackjack player.
 		private:
-			std::vector<Hand> hands;//Put the hand in a vector since there could be more than one due to a split.
+			//std::vector<Hand> hands;//Put the hand in a vector since there could be more than one due to a split.
+			HandCollection collHands;
 
 		public:
-			Player();//Default Cunstructor.
-			size_t numHands() const;//Returns the number of hands the player currently has.
-			Hand& getHand( size_t n );//Returns the hand at location n. n should be between 0 and numHands()-1, inclusive.
-			std::vector<Hand>& getHands();//Returns the hands as a vector. This is mainly for use with HandsIterator.
+			//Player();//Default Cunstructor.
+			//size_t numHands() const;//Returns the number of hands the player currently has.
+			//Hand& getHand( size_t n );//Returns the hand at location n. n should be between 0 and numHands()-1, inclusive.
+			HandCollection& getHands();//Returns the hands as a vector. This is mainly for use with HandsIterator.
 			//void split( size_t n );//Splits the hand at location n. Throws an exception if the hand can't be split according to the rules of blackjack. n should be between 0 and numHands()-1, inclusive.
 			void split( HandsIterator iteratorPosition );//Splits the hand at the location pointed to by iteratorPosition. Throws an exception if the hand can't be split according to the rules of blackjack.
-			void addHand( Hand newHand );//Add a hand to the end of the list;
-			void addHand( Hand newHand, size_t n );//Add a hand at location n. n should be between 0 and numHands()-1, inclusive.
-			void clearHands();//Remove all the hands.
+			//void addHand( Hand newHand );//Add a hand to the end of the list;
+			//void addHand( Hand newHand, size_t n );//Add a hand at location n. n should be between 0 and numHands()-1, inclusive.
+			//void clearHands();//Remove all the hands.
 	};
 }
 

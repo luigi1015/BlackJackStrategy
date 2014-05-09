@@ -58,7 +58,7 @@ namespace Blackjack
 
 	size_t HandsIterator::getNumHands() const
 	{//Get the current number of hands.
-		return player.numHands();
+		return collection.numHands();
 	}
 
 	Hand& HandsIterator::currentHand()
@@ -73,7 +73,7 @@ namespace Blackjack
 		}
 		else
 		{
-			return player.getHand( position );
+			return collection.getHand( position );
 		}
 	}
 }
