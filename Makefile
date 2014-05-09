@@ -2,7 +2,7 @@
 
 all: Card.o Hand.o test
 
-test: CardTest HandTest HandsIteratorTest
+test: CardTest HandTest HandsIteratorTest HandCollectionTest
 
 Card.o: Card.h Card.cpp
 	g++ -g -Wall -c Card.cpp
@@ -15,6 +15,9 @@ Hand.o: Hand.h Hand.cpp
 
 HandCollection.o: HandCollection.h HandCollection.cpp
 	g++ -g -Wall -c HandCollection.cpp
+
+HandCollectionTest: HandCollection.h HandCollection.cpp HandCollection.o HandCollectionTest.cpp
+	g++ -g -Wall -o HandCollectionTest HandCollection.o Hand.o Card.o HandCollectionTest.cpp -lcppunit
 
 Player.o: Player.h Player.cpp
 	g++ -g -Wall -c Player.cpp
