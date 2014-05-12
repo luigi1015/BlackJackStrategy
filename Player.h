@@ -4,7 +4,8 @@
 //#include "Hand.h"
 #include "HandsIterator.h"
 //#include "HandCollection.h"
-#include <vector>
+//#include <vector>
+#include <string>
 
 namespace Blackjack
 {
@@ -13,6 +14,7 @@ namespace Blackjack
 		private:
 			//std::vector<Hand> hands;//Put the hand in a vector since there could be more than one due to a split.
 			HandCollection collHands;
+			std::string name;
 
 		public:
 			//Player();//Default Cunstructor.
@@ -24,6 +26,9 @@ namespace Blackjack
 			//void addHand( Hand newHand );//Add a hand to the end of the list;
 			//void addHand( Hand newHand, size_t n );//Add a hand at location n. n should be between 0 and numHands()-1, inclusive.
 			//void clearHands();//Remove all the hands.
+			virtual void play();//Virtual method for this player to play Blackjack.
+			virtual void getCard( HandsIterator iteratorPosition );//Gets a card for the hand pointed to by iteratorPosition.
+			void setName( std::string newName );//Sets the name of the player.
 	};
 }
 

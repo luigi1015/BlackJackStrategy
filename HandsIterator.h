@@ -26,9 +26,10 @@ namespace Blackjack
 			void next();//Move to the next hand.
 			bool isDone() const;//Check if this is the last hand.
 			Hand& currentHand();//Return the current hand.
-
+/*
 		protected:
 			HandsIterator();//Default constructor. It's protected so it won't be called by an unauthorized class.
+*/
 	};
 }
 
