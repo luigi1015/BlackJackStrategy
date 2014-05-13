@@ -53,7 +53,7 @@ class HandCollectionTest : public CppUnit::TestCase
 		
 		void testIterateCollection()
 		{//Basic test of iterating through a hand.
-			size+t i = 0;
+			size_t i = 0;
 			//Set up the player.
 			Blackjack::Hand firstHand, secondHand;
 			Blackjack::HandCollection collection;
@@ -65,7 +65,7 @@ class HandCollectionTest : public CppUnit::TestCase
 			collection.addHand( firstHand );
 			collection.addHand( secondHand );
 
-			for( Blackjack::HandCollection::HandList it = collection.begin(); it != collection.end(); it++ )
+			for( Blackjack::HandCollection::HandList::iterator it = collection.begin(); it != collection.end(); it++ )
 			{
 				if( i == 0 )
 				{
@@ -105,6 +105,7 @@ class HandCollectionTest : public CppUnit::TestCase
 				{
 					CPPUNIT_ASSERT( false == true );//Should not get here since the above should cover all the hands.
 				}
+			}
 		}
 
 		//Create the test suite using CPPUnit macros.

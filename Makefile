@@ -2,7 +2,8 @@
 
 all: Card.o Hand.o test
 
-test: CardTest HandTest HandsIteratorTest HandCollectionTest
+test: CardTest HandTest HandCollectionTest
+#test: CardTest HandTest HandsIteratorTest HandCollectionTest
 
 Card.o: Card.h Card.cpp
 	g++ -g -Wall -c Card.cpp
@@ -28,8 +29,8 @@ HandsIterator.o: HandsIterator.h HandsIterator.cpp
 HandTest: Hand.h Hand.cpp Hand.o HandTest.cpp
 	g++ -g -Wall -o HandTest HandTest.cpp Hand.o Card.o -lcppunit
 
-HandsIteratorTest: Hand.h Hand.cpp Hand.o Card.h Card.cpp Card.o HandsIterator.h HandsIterator.cpp HandsIterator.o HandCollection.h HandCollection.cpp HandCollection.o Player.h Player.cpp Player.o HandsIteratorTest.cpp
-	g++ -g -Wall -o HandsIteratorTest HandsIteratorTest.cpp HandsIterator.o Hand.o Card.o Player.o HandCollection.o -lcppunit
+#HandsIteratorTest: Hand.h Hand.cpp Hand.o Card.h Card.cpp Card.o HandsIterator.h HandsIterator.cpp HandsIterator.o HandCollection.h HandCollection.cpp HandCollection.o Player.h Player.cpp Player.o HandsIteratorTest.cpp
+#	g++ -g -Wall -o HandsIteratorTest HandsIteratorTest.cpp HandsIterator.o Hand.o Card.o Player.o HandCollection.o -lcppunit
 
 clean:
 	rm *.o *~ *.gch CardTest HandTest HandsIteratorTest
