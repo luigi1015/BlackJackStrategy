@@ -15,8 +15,8 @@ namespace Blackjack
 			Hand& getHand( size_t n );//Returns the hand at location n. n should be between 0 and numHands()-1, inclusive.
 			//std::vector<Hand>& getHands();//Returns the hands as a vector. This is mainly for use with HandsIterator.
 			void addHand( Hand newHand );//Add a hand to the end of the list;
-			void addHand( Hand newHand, size_t n );//Add a hand at location n. n should be between 0 and numHands()-1, inclusive.
-			void addHand( Hand newHand, HandList::iterator position );//Add a hand at location position.
+			//void addHand( Hand newHand, size_t n );//Add a hand at location n. n should be between 0 and numHands()-1, inclusive.
+			HandList::iterator addHand( Hand newHand, HandList::iterator position );//Add a hand at location position.
 			void clearHands();//Remove all the hands.
 			typedef HandList::iterator iterator;//An iterator for the hands.
 			typedef HandList::const_iterator const_iterator;//A constant iterator for the hands.

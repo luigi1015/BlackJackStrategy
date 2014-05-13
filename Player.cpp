@@ -22,6 +22,7 @@ namespace Blackjack
 			virtual void play();//Virtual method for this player to play Blackjack.
 			virtual void getCard( HandsIterator iteratorPosition );//Gets a card for the hand pointed to by iteratorPosition.
 			void setName( std::string newName );//Sets the name of the player.
+			Card getRandomCard();//Returns a randomly valued card.
 	};
 }
 */
@@ -74,5 +75,9 @@ namespace Blackjack
 	void Player::setName( std::string newName )
 	{//Sets the name of the player.
 		name = newName;
+	}
+
+	Card getRandomCard()
+	{//Returns a randomly valued card.
 	}
 }

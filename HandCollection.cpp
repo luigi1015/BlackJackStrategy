@@ -18,8 +18,8 @@ namespace Blackjack
 			Hand& getHand( size_t n );//Returns the hand at location n. n should be between 0 and numHands()-1, inclusive.
 			//std::vector<Hand>& getHands();//Returns the hands as a vector. This is mainly for use with HandsIterator.
 			void addHand( Hand newHand );//Add a hand to the end of the list;
-			void addHand( Hand newHand, size_t n );//Add a hand at location n. n should be between 0 and numHands()-1, inclusive.
-			void HandCollection::addHand( Hand newHand, iterator position );//Add a hand at location position.
+			//void addHand( Hand newHand, size_t n );//Add a hand at location n. n should be between 0 and numHands()-1, inclusive.
+			HandList::iterator HandCollection::addHand( Hand newHand, iterator position );//Add a hand at location position.
 			void clearHands();//Remove all the hands.
 			typedef HandList::iterator iterator;//An iterator for the hands.
 			typedef HandList::const_iterator const_iterator;//A constant iterator for the hands.
@@ -32,6 +32,8 @@ namespace Blackjack
 
 namespace Blackjack
 {
+	typedef std::vector<Hand> HandList;//A typedef to help the public side of the class, so don't have to keep using std::vector...
+
 	HandCollection::HandCollection()
 	{//Default Cunstructor.
 	}
@@ -57,7 +59,7 @@ namespace Blackjack
 	{//Add a hand to the end of the list;
 		hands.push_back( newHand );
 	}
-
+/*
 	void HandCollection::addHand( Hand newHand, size_t n )
 	{//Add a hand at location n. n should be between 0 and numHands()-1, inclusive.
 		std::stringstream errorStream;
@@ -73,10 +75,10 @@ namespace Blackjack
 			hands.insert( (hands.begin() + n), newHand );
 		}
 	}
-
-	void HandCollection::addHand( Hand newHand, iterator position )
+*/
+	HandList::iterator HandCollection::addHand( Hand newHand, iterator position )
 	{//Add a hand at location position.
-		hands.insert( position, newHand );
+		return hands.insert( position, newHand );
 	}
 
 	void HandCollection::clearHands()
