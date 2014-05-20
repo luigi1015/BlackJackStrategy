@@ -8,6 +8,7 @@ namespace Blackjack
 			//std::vector<Hand> hands;//Put the hand in a vector since there could be more than one due to a split.
 			HandCollection collHands;
 			std::string name;
+			Dealer* myDealer;//The dealer for this game.
 
 		public:
 			//Player();//Default Cunstructor.
@@ -22,6 +23,7 @@ namespace Blackjack
 			virtual void play();//Virtual method for this player to play Blackjack.
 			virtual void getCard( HandsIterator iteratorPosition );//Gets a card for the hand pointed to by iteratorPosition.
 			void setName( std::string newName );//Sets the name of the player.
+			void setDealer( Dealer* newDealer );//Set the dealer.
 	};
 }
 */
@@ -74,5 +76,10 @@ namespace Blackjack
 	void Player::setName( std::string newName )
 	{//Sets the name of the player.
 		name = newName;
+	}
+
+	void Player::setDealer( Dealer* newDealer )
+	{//Sets the name of the player.
+		myDealer = newDealer;
 	}
 }
