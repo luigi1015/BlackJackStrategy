@@ -21,27 +21,29 @@ namespace Blackjack
 */
 namespace Blackjack
 {
-	Dealer()
+	Dealer::Dealer()
 	{//Default Constructor.
 	}
 
-	~Dealer()
+	Dealer::~Dealer()
 	{//Default Destructor. Frees all the player pointers.
 	}
 
-	void startGame()
+	void Dealer::startGame()
 	{//Starts the players playing.
 	}
 
-	void addUserPlayer( std::string newName )
+	void Dealer::addUserPlayer( std::string newName )
 	{//Registers a new user's player for the game. newName is the name of the new player.
 	}
 
-	void addAutoPlayer( std::string newName )
+	void Dealer::addAutoPlayer( std::string newName )
 	{//Registers a new automatic player for the game. newName is the name of the new player.
 	}
 
-	Card getRandomCard()
+	Card Dealer::getRandomCard()
 	{//Returns a randomly valued card.
+		Card randomCard( static_cast<Rank>(0,12), static_cast<Suit>(0,3) );
+		return randomCard;
 	}
 }
