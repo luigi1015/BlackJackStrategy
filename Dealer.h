@@ -11,7 +11,7 @@ namespace Blackjack
 	class Dealer: public Player
 	{//A Blackjack dealer.
 		private:
-			std::vector<Player*> players;
+			std::vector<Player*> players;//A vector of the players. I have them stored as pointers so that it can store subclasses of Player.
 
 		public:
 			//Dealer();//Default Constructor.
