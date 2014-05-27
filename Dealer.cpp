@@ -6,10 +6,10 @@ namespace Blackjack
 	class Dealer: public Player
 	{//A Blackjack dealer.
 		private:
-			std::vector<Player*> players;
+			std::vector<Player*> players;//A vector of the players. I have thems stored as pointers so that it can store subclasses of Player.
 
 		public:
-			Dealer();//Default Constructor.
+			//Dealer();//Default Constructor.
 			~Dealer();//Default Destructor. Frees all the player pointers.
 			//void deal();//Deal cards to players.
 			void startGame();//Starts the players playing.
@@ -21,12 +21,20 @@ namespace Blackjack
 */
 namespace Blackjack
 {
+/*
 	Dealer::Dealer()
 	{//Default Constructor.
 	}
+*/
 
 	Dealer::~Dealer()
 	{//Default Destructor. Frees all the player pointers.
+		for( std::vector<Player*>::iterator i = players.begin(); i != players.end(); i++ )
+		{//Iterate through each element in the players vector and delete each one.
+			delete *i;
+		}
+
+		players.clear();//Remove all the deleted pointers from the players vector.
 	}
 
 	void Dealer::startGame()
@@ -35,6 +43,7 @@ namespace Blackjack
 
 	void Dealer::addUserPlayer( std::string newName )
 	{//Registers a new user's player for the game. newName is the name of the new player.
+		players.push_back( new UserPlayer(newName) );
 	}
 
 	void Dealer::addAutoPlayer( std::string newName )

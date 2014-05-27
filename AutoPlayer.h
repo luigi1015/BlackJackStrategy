@@ -1,8 +1,8 @@
 #ifndef AutoPlayer_h
 #define AutoPlayer_h
 
-#include "Hand.h"
-#include “Player.h”
+//#include "Hand.h"
+#include "Player.h"
 
 namespace Blackjack
 {
@@ -11,7 +11,8 @@ namespace Blackjack
 		private:
 
 		public:
-			AutoPlayer();//Default Cunstructor.
+			AutoPlayer();//Default Constructor.
+			AutoPlayer( std::string newName );//Constructor with the player's name.
 	};
 }
 

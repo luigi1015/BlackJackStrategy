@@ -1,7 +1,8 @@
 #ifndef UserPlayer_h
 #define UserPlayer_h
 
-#include "Hand.h"
+//#include "Hand.h"
+#include "Player.h"
 
 namespace Blackjack
 {
@@ -10,7 +11,8 @@ namespace Blackjack
 		private:
 
 		public:
-			UserPlayer();//Default Cunstructor.
+			UserPlayer();//Default Constructor.
+			UserPlayer( std::string newName );//Constructor with the player's name.
 	};
 }
 

@@ -18,7 +18,7 @@ namespace Blackjack
 			Dealer* myDealer;//The dealer for this game.
 
 		public:
-			//Player();//Default Cunstructor.
+			//Player();//Default Constructor.
 			//size_t numHands() const;//Returns the number of hands the player currently has.
 			//Hand& getHand( size_t n );//Returns the hand at location n. n should be between 0 and numHands()-1, inclusive.
 			HandCollection& getHands();//Returns the hands as a vector. This is mainly for use with HandsIterator.

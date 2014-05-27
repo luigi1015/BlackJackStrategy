@@ -14,7 +14,7 @@ namespace Blackjack
 			std::vector<Player*> players;
 
 		public:
-			Dealer();//Default Constructor.
+			//Dealer();//Default Constructor.
 			~Dealer();//Default Destructor. Frees all the player pointers.
 			//void deal();//Deal cards to players.
 			void startGame();//Starts the players playing.
