@@ -13,6 +13,7 @@ namespace Blackjack
 		public:
 			UserPlayer();//Default Constructor.
 			UserPlayer( std::string newName );//Constructor with the player's name.
+			void play();//Play blackjack with user input.
 	};
 }
 

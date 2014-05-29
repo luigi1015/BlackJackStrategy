@@ -13,6 +13,7 @@ namespace Blackjack
 		public:
 			AutoPlayer();//Default Constructor.
 			AutoPlayer( std::string newName );//Constructor with the player's name.
+			void play();//Automatically play blackjack.
 	};
 }
 
