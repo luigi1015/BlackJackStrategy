@@ -48,6 +48,7 @@ namespace Blackjack
 
 	void Dealer::addAutoPlayer( std::string newName )
 	{//Registers a new automatic player for the game. newName is the name of the new player.
+		players.push_back( new AutoPlayer(newName) );
 	}
 
 	Card Dealer::getRandomCard()

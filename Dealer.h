@@ -4,6 +4,8 @@
 #include <vector>
 #include <string>
 #include "Hand.h"
+#include "UserPlayer.h"
+#include "AutoPlayer.h"
 #include "Random-Cpp/random.cpp"
 
 namespace Blackjack
