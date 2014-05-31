@@ -73,9 +73,18 @@ namespace Blackjack
 		hands.clear();
 	}
 */
+	void Player::getCard( HandsIterator iteratorPosition )
+	{//Gets a card for the hand pointed to by iteratorPosition.
+	}
+
 	void Player::setName( std::string newName )
 	{//Sets the name of the player.
 		name = newName;
+	}
+
+	std::string Player::getName()
+	{//Returns the name of the player.
+		return name;
 	}
 
 	void Player::setDealer( Dealer* newDealer )
