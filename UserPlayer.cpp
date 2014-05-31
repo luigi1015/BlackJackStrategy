@@ -1,9 +1,6 @@
-#ifndef UserPlayer_h
-#define UserPlayer_h
+#include UserPlayer.h
 
-//#include "Hand.h"
-#include "Player.h"
-
+/*
 namespace Blackjack
 {
 	class UserPlayer: public Player
@@ -16,5 +13,20 @@ namespace Blackjack
 			void play();//Play blackjack with user input.
 	};
 }
+*/
 
-#endif /* UserPlayer_h */
+namespace Blackjack
+{
+	UserPlayer::UserPlayer() : Player()
+	{//Default Constructor.
+	}
+
+	UserPlayer::UserPlayer( std::string newName ) : Player()
+	{//Constructor with the player's name.
+		name = newName;
+	}
+
+	void UserPlayer::play()
+	{//Play blackjack with user input.
+	}
+}
