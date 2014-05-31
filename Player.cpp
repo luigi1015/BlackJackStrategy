@@ -1,4 +1,6 @@
 #include "Player.h"
+#include <stdexcept>
+
 /*
 namespace Blackjack
 {
@@ -11,7 +13,7 @@ namespace Blackjack
 			Dealer* myDealer;//The dealer for this game.
 
 		public:
-			//Player();//Default Cunstructor.
+			Player();//Default Cunstructor.
 			//size_t numHands() const;//Returns the number of hands the player currently has.
 			//Hand& getHand( size_t n );//Returns the hand at location n. n should be between 0 and numHands()-1, inclusive.
 			HandCollection& getHands();//Returns the hands as a vector. This is mainly for use with HandsIterator.
@@ -21,7 +23,7 @@ namespace Blackjack
 			//void addHand( Hand newHand, size_t n );//Add a hand at location n. n should be between 0 and numHands()-1, inclusive.
 			//void clearHands();//Remove all the hands.
 			virtual void play();//Virtual method for this player to play Blackjack.
-			virtual void getCard( HandsIterator iteratorPosition );//Gets a card for the hand pointed to by iteratorPosition.
+			void getRandomCard( iterator iteratorPosition );//Gets a random card for the hand pointed to by iteratorPosition.
 			void setName( std::string newName );//Sets the name of the player.
 			void setDealer( Dealer* newDealer );//Set the dealer.
 	};
@@ -31,11 +33,10 @@ namespace Blackjack
 
 namespace Blackjack
 {
-	/*
 	Player::Player()
 	{//Default Cunstructor.
+		myDealer = 0;
 	}
-	*/
 
 /*
 	size_t Player::numHands() const
@@ -73,8 +74,16 @@ namespace Blackjack
 		hands.clear();
 	}
 */
-	void Player::getCard( HandsIterator iteratorPosition )
-	{//Gets a card for the hand pointed to by iteratorPosition.
+	void Player::getRandomCard( iterator iteratorPosition )
+	{//Gets a random card for the hand pointed to by iteratorPosition.
+		if( myDealer != 0 )
+		{//The dealer object is not a null pointer, so it's ok to use that to get a random card.
+			*iteratorPosition.addCard( myDealer->getRandomCard() );
+		}
+		else
+		{//The dealer object is a null pointer, throw an error.
+			throw std::runtime_error( "In Player::getRandomCard( iterator iteratorPosition ), the dealer isn't registered to the player. The function needs the dealer to ger a random card."
+		}
 	}
 
 	void Player::setName( std::string newName )

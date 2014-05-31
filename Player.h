@@ -18,7 +18,7 @@ namespace Blackjack
 			Dealer* myDealer;//The dealer for this game.
 
 		public:
-			//Player();//Default Constructor.
+			Player();//Default Constructor.
 			//size_t numHands() const;//Returns the number of hands the player currently has.
 			//Hand& getHand( size_t n );//Returns the hand at location n. n should be between 0 and numHands()-1, inclusive.
 			HandCollection& getHands();//Returns the hands as a vector. This is mainly for use with HandsIterator.
@@ -28,7 +28,7 @@ namespace Blackjack
 			//void addHand( Hand newHand, size_t n );//Add a hand at location n. n should be between 0 and numHands()-1, inclusive.
 			//void clearHands();//Remove all the hands.
 			virtual void play();//Virtual method for this player to play Blackjack.
-			void getCard( HandsIterator iteratorPosition );//Gets a card for the hand pointed to by iteratorPosition.
+			void getRandomCard( iterator iteratorPosition );//Gets a random card for the hand pointed to by iteratorPosition.
 			void setName( std::string newName );//Sets the name of the player.
 			std::string getName();//Returns the name of the player.
 			void setDealer( Dealer* newDealer );//Set the dealer.
