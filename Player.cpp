@@ -11,9 +11,10 @@ namespace Blackjack
 			HandCollection collHands;
 			std::string name;
 			Dealer* myDealer;//The dealer for this game.
+			unsigned int ID;//The programatically generated ID of the payer.
 
 		public:
-			Player();//Default Cunstructor.
+			Player( unsigned int newID );//Constructor with the ID.
 			//size_t numHands() const;//Returns the number of hands the player currently has.
 			//Hand& getHand( size_t n );//Returns the hand at location n. n should be between 0 and numHands()-1, inclusive.
 			HandCollection& getHands();//Returns the hands as a vector. This is mainly for use with HandsIterator.
@@ -25,7 +26,10 @@ namespace Blackjack
 			virtual void play();//Virtual method for this player to play Blackjack.
 			void getRandomCard( iterator iteratorPosition );//Gets a random card for the hand pointed to by iteratorPosition.
 			void setName( std::string newName );//Sets the name of the player.
+			std::string getName();//Returns the name of the player.
 			void setDealer( Dealer* newDealer );//Set the dealer.
+			void setID( unsigned int newID );//Set the ID to newID.
+			unsigned int getID();//Returns the ID.
 	};
 }
 */
@@ -33,9 +37,10 @@ namespace Blackjack
 
 namespace Blackjack
 {
-	Player::Player()
+	Player::Player( unsigned int newID )
 	{//Default Cunstructor.
 		myDealer = 0;
+		setID( newID );
 	}
 
 /*
@@ -99,5 +104,14 @@ namespace Blackjack
 	void Player::setDealer( Dealer* newDealer )
 	{//Sets the name of the player.
 		myDealer = newDealer;
+	}
+	void setID( unsigned int newID )
+	{//Set the ID to newID.
+		ID = newID;
+	}
+
+	unsigned int getID()
+	{//Returns the ID.
+		return ID;
 	}
 }

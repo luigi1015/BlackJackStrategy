@@ -16,9 +16,11 @@ namespace Blackjack
 			HandCollection collHands;
 			std::string name;
 			Dealer* myDealer;//The dealer for this game.
+			unsigned int ID;//The programatically generated ID of the payer.
 
 		public:
-			Player();//Default Constructor.
+			struct playReturnValues { quitPlaying, keepPlaying };//Return values for the play method. quitPlaying will tell the dealer that the player wants to stop while keepPlaying will tell the dealer that the player wants to continue.
+			Player( unsigned int newID );//Constructor with the ID.
 			//size_t numHands() const;//Returns the number of hands the player currently has.
 			//Hand& getHand( size_t n );//Returns the hand at location n. n should be between 0 and numHands()-1, inclusive.
 			HandCollection& getHands();//Returns the hands as a vector. This is mainly for use with HandsIterator.
@@ -27,11 +29,13 @@ namespace Blackjack
 			//void addHand( Hand newHand );//Add a hand to the end of the list;
 			//void addHand( Hand newHand, size_t n );//Add a hand at location n. n should be between 0 and numHands()-1, inclusive.
 			//void clearHands();//Remove all the hands.
-			virtual void play();//Virtual method for this player to play Blackjack.
+			virtual int play();//Virtual method for this player to play Blackjack. Returns an int of value from playReturnValues to tell the dealer if it wants to continue or stop.
 			void getRandomCard( iterator iteratorPosition );//Gets a random card for the hand pointed to by iteratorPosition.
 			void setName( std::string newName );//Sets the name of the player.
 			std::string getName();//Returns the name of the player.
 			void setDealer( Dealer* newDealer );//Set the dealer.
+			void setID( unsigned int newID );//Set the ID to newID.
+			unsigned int getID();//Returns the ID.
 	};
 }
 
