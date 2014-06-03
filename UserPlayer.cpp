@@ -17,11 +17,11 @@ namespace Blackjack
 
 namespace Blackjack
 {
-	UserPlayer::UserPlayer() : Player()
+	UserPlayer::UserPlayer( unsigned int newID ) : Player( newID )
 	{//Default Constructor.
 	}
 
-	UserPlayer::UserPlayer( std::string newName ) : Player()
+	UserPlayer::UserPlayer( std::string newName, unsigned int newID ) : Player( newID )
 	{//Constructor with the player's name.
 		name = newName;
 	}
