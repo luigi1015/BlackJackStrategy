@@ -14,7 +14,10 @@ namespace Blackjack
 			unsigned int ID;//The programatically generated ID of the payer.
 
 		public:
+			struct playReturnValues { quitPlaying, keepPlaying };//Return values for the play method. quitPlaying will tell the dealer that the player wants to stop while keepPlaying will tell the dealer that the player wants to continue.
 			Player( unsigned int newID );//Constructor with the ID.
+			Player( unsigned int newID, std::string newName );//Constructor with the ID and the name.
+			Player( unsigned int newID, std::string newName, Dealer* newDealer );//Constructor with the ID, the name and the dealer.
 			//size_t numHands() const;//Returns the number of hands the player currently has.
 			//Hand& getHand( size_t n );//Returns the hand at location n. n should be between 0 and numHands()-1, inclusive.
 			HandCollection& getHands();//Returns the hands as a vector. This is mainly for use with HandsIterator.
@@ -23,7 +26,7 @@ namespace Blackjack
 			//void addHand( Hand newHand );//Add a hand to the end of the list;
 			//void addHand( Hand newHand, size_t n );//Add a hand at location n. n should be between 0 and numHands()-1, inclusive.
 			//void clearHands();//Remove all the hands.
-			virtual void play();//Virtual method for this player to play Blackjack.
+			virtual int play();//Virtual method for this player to play Blackjack. Returns an int of value from playReturnValues to tell the dealer if it wants to continue or stop.
 			void getRandomCard( iterator iteratorPosition );//Gets a random card for the hand pointed to by iteratorPosition.
 			void setName( std::string newName );//Sets the name of the player.
 			std::string getName();//Returns the name of the player.
@@ -38,9 +41,23 @@ namespace Blackjack
 namespace Blackjack
 {
 	Player::Player( unsigned int newID )
-	{//Default Cunstructor.
+	{//Constructor with the ID.
 		myDealer = 0;
 		setID( newID );
+	}
+
+	Player::Player( unsigned int newID, std::string newName )
+	{//Constructor with the ID and the name.
+		myDealer = 0;
+		setID( newID );
+		setName( newName );
+	}
+
+	Player::Player( unsigned int newID, std::string newName, Dealer* newDealer )
+	{//Constructor with the ID, the name and the dealer.
+		setID( newID );
+		setName( newName );
+		setDealer( newDealer );
 	}
 
 /*
