@@ -21,11 +21,14 @@ namespace Blackjack
 */
 namespace Blackjack
 {
-/*
 	Dealer::Dealer()
 	{//Default Constructor.
+		//Create a new hand.
+		Hand newHand;//Create the hand object itself.
+		newHand.addCard( myDealer->getRandomCard() );//Get the first random card of the hand.
+		newHand.addCard( myDealer->getRandomCard() );//Get the second random card of the hand.
+		collHands.addHand( newHand );//Add the new hand to the collection of hands.
 	}
-*/
 
 	Dealer::~Dealer()
 	{//Default Destructor. Frees all the player pointers.
@@ -55,5 +58,10 @@ namespace Blackjack
 	{//Returns a randomly valued card.
 		Card randomCard( static_cast<Rank>(0,12), static_cast<Suit>(0,3) );
 		return randomCard;
+	}
+
+	Card Dealer::getDealerCard()
+	{//Returns one of the dealer's card for the player to see.
+		return (*collHands.begin()).getCard(1);//Return the first card of the first hand.
 	}
 }

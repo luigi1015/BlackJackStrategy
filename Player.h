@@ -17,6 +17,7 @@ namespace Blackjack
 			std::string name;
 			Dealer* myDealer;//The dealer for this game.
 			unsigned int ID;//The programatically generated ID of the payer.
+			long money;//How much money the player has.
 
 		public:
 			struct playReturnValues { quitPlaying, keepPlaying };//Return values for the play method. quitPlaying will tell the dealer that the player wants to stop while keepPlaying will tell the dealer that the player wants to continue.
@@ -39,6 +40,10 @@ namespace Blackjack
 			void setDealer( Dealer* newDealer );//Set the dealer.
 			void setID( unsigned int newID );//Set the ID to newID.
 			unsigned int getID();//Returns the ID.
+			long setMoney( long newMoney );//Sets the amount of money the player has and returns that amount.
+			long getMoney();//Returns the amount of money the player has.
+			long addMoney( long newMoney );//Adds newMoney of money to the amount the player has and returns the updated amount.
+			long subtractMoney( long newMoney );//Subtracts newMoney of money from the amount the player has and returns the updated amount.
 	};
 }
 
