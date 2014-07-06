@@ -57,7 +57,9 @@ namespace Blackjack
 
 		if( getMoney() > 0 )
 		{//If the user has money left, let the user play.
-			long bet = 0;//The amount of money the user wants to bet.
+			//long bet = 0;//The amount of money the user wants to bet.
+			
+			//TODO: Change bet to set the bet value in hand rather than the long value above.
 
 			if( collHands.numHands()  == 0 )
 			{//If there aren't any hands yet, create the first one so that play can start.
@@ -70,21 +72,58 @@ namespace Blackjack
 			for( HandList::iterator itr = collHands.begin(); itr != collHands.end(); itr++ )
 			{//Play each hand by iteration through them.
 				bool doneWithThisHand = false;//Used to keep track of wether the user has decided to stop playing this hand.
-				bet = 0;//Reset the bet.
+				//bet = 0;//Reset the bet.
 
-				while( (bet <= 0) || (bet > getMoney()) )
+				while( ((*itr).getBet() <= 0) || ((*itr).getBet() > getMoney()) )
 				{//Keep asking for a bet until you get a valid one (bet needs to be a positive number less than or equal to the amount of money the player has.
+					long tempBet;//Temporary variable to hold the value of the bet temporarily.
 					std::cout << "You have " << getMoney() << " money left. How much do you want to bet? ";
 					std::cin >> input;
-					bet = strtol( input.c_str(), NULL, 0 );
+					tempBet = strtol( input.c_str(), NULL, 0 );
 
-					if( (bet <= 0) || (bet > getMoney()) )
+					if( (tempBet <= 0) || (tempBet > getMoney()) )
 					{//The bet was invalid, give an error.
-						std::cerr << "The bet you entered, " << bet << ", was invalid, please try again with a number between 1 and " << getMoney() << "." << std::endl;
+						std::cerr << "The bet you entered, " << tempBet << ", was invalid, please try again with a number between 1 and " << getMoney() << "." << std::endl;
+					}
+					else
+					{//The bet is valid, set the bet and take the bet out of the player's money..
+						(*itr).setBet( tempBet );
+						money -= tempBet;
 					}
 				}
 
-				if( *itr.canSplit() )
+				//Double Down
+				if( (*itr).getBet() * 2 <= getMoney() )
+				{//If the player has enough money, let the player double down.
+					std::string doubleDownInput;
+					do
+					{//Keep looping until get a y or a n from the user.
+						std::cout << *itr << std::endl;//Print out the hand to the user.
+						std::cout << "Points: " << *itr.getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
+						std::cout << "Money: " << getMoney() << std::endl;//Print out the amount of money the user has.
+						std::cout << "Do you want to double down? (y/n) ";
+						std::cin >> doubleDownInput;
+
+						if( caseInsensitiveStringCompare(doubleDownInput, "Y") )
+						{//If the user said yes, double down and take the additional bet amount out of the player's money.
+							//bet *= 2;
+							money -= (*itr).getBet();
+							(*itr).doubleBet();
+							doneWithThisHand = true;
+						}
+						else if( !caseInsensitiveStringCompare(doubleDownInput, "N") )
+						{//If the user didn't specify yes (previous if statement) or no (this if statement), give the user an error.
+							std::cerr << "Please input the character y or the character n." << std::endl;
+						}
+					}while( !caseInsensitiveStringCompare(splitInput, "Y") && !caseInsensitiveStringCompare(splitInput, "N") );
+				}
+				else
+				{//Let the user know the user can't souble down.
+					std::cout << "You don't have enough money to double down." << std::endl;
+				}
+
+				//Split
+				if( (*itr).canSplit() )
 				{//If the hand can be split, ask the user wether to do that.
 					std::string splitInput;
 					do
@@ -105,34 +144,6 @@ namespace Blackjack
 							std::cerr << "Please input the character y or the character n." << std::endl;
 						}
 					}while( !caseInsensitiveStringCompare(splitInput, "Y") && !caseInsensitiveStringCompare(splitInput, "N") );
-				}
-
-				//Double Down
-				if( bet * 2 <= getMoney() )
-				{//If the player has enough money, let the player double down.
-					std::string doubleDownInput;
-					do
-					{//Keep looping until get a y or a n from the user.
-						std::cout << *itr << std::endl;//Print out the hand to the user.
-						std::cout << "Points: " << *itr.getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
-						std::cout << "Money: " << getMoney() << std::endl;//Print out the amount of money the user has.
-						std::cout << "Do you want to double down? (y/n) ";
-						std::cin >> doubleDownInput;
-
-						if( caseInsensitiveStringCompare(doubleDownInput, "Y") )
-						{//If the user said yes, split the hand.
-							bet *= 2;
-							doneWithThisHand = true;
-						}
-						else if( !caseInsensitiveStringCompare(doubleDownInput, "N") )
-						{//If the user didn't specify yes (previous if statement) or no (this if statement), give the user an error.
-							std::cerr << "Please input the character y or the character n." << std::endl;
-						}
-					}while( !caseInsensitiveStringCompare(splitInput, "Y") && !caseInsensitiveStringCompare(splitInput, "N") );
-				}
-				else
-				{//Let the user know the user can't souble down.
-					std::cout << "You don't have enough money to double down." << std::endl;
 				}
 					
 				while( (doneWithThisHand != true) && (*itr.getMaxPointsAtOrBelow21() < 21) )
@@ -172,7 +183,7 @@ namespace Blackjack
 				//Print out the hand at the end of the play
 				std::cout << "This hand: " << std::endl;
 				std::cout << *itr << std::endl;//Print out the hand to the user.
-				std::cout << "Points: " << *itr.getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
+				std::cout << "Points: " << (*itr).getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
 			}
 		}
 		else
@@ -200,7 +211,7 @@ namespace Blackjack
 			{//Invalid response. Give an error.
 				std::cerr << "Your answer on whether to quit wasn't recognized, please try again." << std::endl;
 			}
-		}while( caseInsensitiveStringCompare(input, "Y") || caseInsensitiveStringCompare(input, "N") )
+		}while( caseInsensitiveStringCompare(input, "Y") || caseInsensitiveStringCompare(input, "N") );
 		
 		//Execution shouldn't get here, but in case the compiler will complian about the possibility of ending the method without a return value I'll put a default.
 		std::cerr << "Something unexpected happened in UserPlayer::askQuit(), quitting." << std::endl;

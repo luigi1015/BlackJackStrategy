@@ -10,6 +10,7 @@ namespace Blackjack
 	{//A hand of playing cards.
 		private:
 			std::vector<Card> cards;
+			long bet;
 
 		public:
 			Hand();//Default Cunstructor.
@@ -24,6 +25,10 @@ namespace Blackjack
 			bool isPair() const;//Returns true if this hand is a pair of equal rank cards.
 			bool isBust() const;//Returns if this is a bust according to the rules of BlackJack. Basically it's a bust if the minimum number of points is above 21.
 			bool isBlackJack() const;//Returns true if the points add up to 21 according to the rules of BlackJack.
+			long getBet();//Returns the current bet.
+			void setBet( long newBet );//Sets the bet.
+			long addToBet( long additionalBet );//Adds additionalBet to bet and returns the new bet.
+			long doubleBet();//Doubles bet and returns the new bet. (for doubling down)
 			friend std::ostream& operator<<(std::ostream &out, const Hand &h);//For stream output.
 	};
 }
@@ -32,6 +37,7 @@ namespace Blackjack
 {
 	Hand::Hand()
 	{//Default Cunstructor.
+		bet = 0;
 	}
 
 	void Hand::addCard( Rank newCardRank, Suit newCardSuit )
@@ -166,15 +172,39 @@ namespace Blackjack
 		return ( (getNumCards() == 2) && (cards.at(0).getRank() == cards.at(1).getRank()) );
 	}
 
+	long Hand::getBet()
+	{//Returns the current bet.
+		return bet;
+	}
+
+	void Hand::setBet( long newBet )
+	{//Sets the bet.
+		bet = newBet;
+	}
+
+	long Hand::addToBet( long additionalBet )
+	{//Adds additionalBet to bet and returns the new bet.
+		bet += additionalBet;
+		return bet;
+	}
+
+	long Hand::doubleBet()
+	{//Doubles bet and returns the new bet. (for doubling down)
+		bet *= 2;
+		return bet;
+	}
+
 	std::ostream& operator<<(std::ostream &out, const Hand &h)
 	{//For stream output.
 		out << "There are " << h.getNumCards() << " cards." << std::endl << "Cards: " << std::endl;
 
+		//Print out the cards
 		for( size_t i = 0; i < h.getNumCards(); i++ )
 		{//Go through each of the cards and output them.
 			out << h.getCard( i ) << std::endl;
 		}
 
+		//Print out the points and if it's a blackjack or bust.
 		out << "Points: " << h.getMaxPointsAtOrBelow21();
 		if( h.isBlackJack() )
 		{
@@ -185,6 +215,8 @@ namespace Blackjack
 			out << " Bust.";
 		}
 		out << std::endl;
+		
+		out << "Bet: " << getBet() << std::endl;
 
 		return out;
 	}
