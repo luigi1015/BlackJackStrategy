@@ -82,9 +82,22 @@ namespace Blackjack
 		return collHands;
 	}
 
-	void Player::split( HandsIterator iteratorPosition )
+	void Player::split( HandList::iterator iteratorPosition )
 	{//Splits the hand at the location pointed to by iteratorPosition. Throws an exception if the hand can't be split according to the rules of blackjack.
-		
+		if( (*iteratorPosition).canSplit() )
+		{//If the hand can be split, go ahead and split it.
+			Card splitCard = (*iteratorPosition).getCard(0);//Get the first card
+			(*iteratorPosition).removeCard( (*iteratorPosition).getNumCards()-1 );//Remove the last card.
+			(*iteratorPosition).addCard( myDealer->getRandomCard() );//Replace the last card.
+
+			//Create the new hand with the split card.
+			Hand newHand;
+			newHand.addCard( splitCard );//Put in the split card.
+			newHand.addCard( myDealer->getRandomCard() );//Put in a random card to round out the hand.
+			collHands.addHand( newHand );//Add the hand to the collection.
+		}
+		else
+		{//If the hand can't be split, give an error.
 	}
 
 /*

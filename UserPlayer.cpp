@@ -58,17 +58,6 @@ namespace Blackjack
 		if( getMoney() > 0 )
 		{//If the user has money left, let the user play.
 			long bet = 0;//The amount of money the user wants to bet.
-			while( (bet <= 0) || (bet > getMoney()) )
-			{//Keep asking for a bet until you get a valid one.
-				std::cout << "You have " << getMoney() << " money left. How much do you want to bet? ";
-				std::cin >> input;
-				bet = strtol( input.c_str(), NULL, 0 );
-				
-				if( (bet <= 0) || (bet > getMoney()) )
-				{//The bet was invalid, give an error.
-					std::cerr << "The bet you entered, " << bet << ", was invalid, please try again with a number between 1 and " << getMoney() << "." << std::endl;
-				}
-			}
 
 			if( collHands.numHands()  == 0 )
 			{//If there aren't any hands yet, create the first one so that play can start.
@@ -80,55 +69,110 @@ namespace Blackjack
 			
 			for( HandList::iterator itr = collHands.begin(); itr != collHands.end(); itr++ )
 			{//Play each hand by iteration through them.
-				//bool doneWithThisHand = false;//USed to keep track of wether the user has decided to stop playing this hand.
+				bool doneWithThisHand = false;//Used to keep track of wether the user has decided to stop playing this hand.
+				bet = 0;//Reset the bet.
 
+				while( (bet <= 0) || (bet > getMoney()) )
+				{//Keep asking for a bet until you get a valid one (bet needs to be a positive number less than or equal to the amount of money the player has.
+					std::cout << "You have " << getMoney() << " money left. How much do you want to bet? ";
+					std::cin >> input;
+					bet = strtol( input.c_str(), NULL, 0 );
+
+					if( (bet <= 0) || (bet > getMoney()) )
+					{//The bet was invalid, give an error.
+						std::cerr << "The bet you entered, " << bet << ", was invalid, please try again with a number between 1 and " << getMoney() << "." << std::endl;
+					}
+				}
+
+				if( *itr.canSplit() )
+				{//If the hand can be split, ask the user wether to do that.
+					std::string splitInput;
+					do
+					{//Keep looping until get a y or a n from the user.
+						std::cout << *itr << std::endl;//Print out the hand to the user.
+						std::cout << "Points: " << *itr.getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
+						std::cout << "This hand can be split. Do you want to split the hand? (y/n) ";
+						std::cin >> splitInput;
+
+						if( caseInsensitiveStringCompare(splitInput, "Y") )
+						{//If the user said yes, split the hand.
+							//Finish this code later
+							//std::cout << "This feature is still under construction." << std::endl;
+							split( itr );
+						}
+						else if( !caseInsensitiveStringCompare(splitInput, "N") )
+						{//If the user didn't specify yes (previous if statement) or no (this if statement), give the user an error.
+							std::cerr << "Please input the character y or the character n." << std::endl;
+						}
+					}while( !caseInsensitiveStringCompare(splitInput, "Y") && !caseInsensitiveStringCompare(splitInput, "N") );
+				}
+
+				//Double Down
+				if( bet * 2 <= getMoney() )
+				{//If the player has enough money, let the player double down.
+					std::string doubleDownInput;
+					do
+					{//Keep looping until get a y or a n from the user.
+						std::cout << *itr << std::endl;//Print out the hand to the user.
+						std::cout << "Points: " << *itr.getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
+						std::cout << "Money: " << getMoney() << std::endl;//Print out the amount of money the user has.
+						std::cout << "Do you want to double down? (y/n) ";
+						std::cin >> doubleDownInput;
+
+						if( caseInsensitiveStringCompare(doubleDownInput, "Y") )
+						{//If the user said yes, split the hand.
+							bet *= 2;
+							doneWithThisHand = true;
+						}
+						else if( !caseInsensitiveStringCompare(doubleDownInput, "N") )
+						{//If the user didn't specify yes (previous if statement) or no (this if statement), give the user an error.
+							std::cerr << "Please input the character y or the character n." << std::endl;
+						}
+					}while( !caseInsensitiveStringCompare(splitInput, "Y") && !caseInsensitiveStringCompare(splitInput, "N") );
+				}
+				else
+				{//Let the user know the user can't souble down.
+					std::cout << "You don't have enough money to double down." << std::endl;
+				}
+					
 				while( (doneWithThisHand != true) && (*itr.getMaxPointsAtOrBelow21() < 21) )
 				{//While  the user hasn't decided to stop playing this hand and the hand is below 21 points, keep playing this hand.
 					std::cout << *itr << std::endl;//Print out the hand to the user.
-					std::cout << *itr.getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
-					
-					if( *itr.canSplit() )
-					{//If the hand can be split, ask the user wether to do that.
-						std::string splitInput;
-						do
-						{//Keep looping until get a y or a n from the user.
-							std::cout << "This hand can be split. Do you want to split the hand? (y/n) ";
-							std::cin >> splitInput;
-							
-							if( caseInsensitiveStringCompare(splitInput, "Y") )
-							{//If the user said yes, split the hand.
-								//Finish this code later
-								std::cout << "This feature is still under construction." << std::endl;
-							}
-							else if( !caseInsensitiveStringCompare(splitInput, "N") )
-							{//If the user didn't specify yes (previous if statement) or no (this if statement), give the user an error.
-								std::cerr << "Please input the character y or the character n." << std::endl;
-							}
-						}while( !caseInsensitiveStringCompare(splitInput, "Y") && !caseInsensitiveStringCompare(splitInput, "N") )
-					}
-					
-					if( *itr.getMaxPointsAtOrBelow21() < 21 )
-					{//If the points for this hand are below 21, see if the user wants to keep going.
-						//Ask if the user wants to deal another card.
-						std::string dealInput;
-						do
-						{//Keep looping until get a y or a n from the user.
-							std::cout << *itr << std::endl;
-							std::cout << "Do you want another card? (y/n) ";
-							std::cin >> dealInput;
+					std::cout << "Points: " << *itr.getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
 
-							if( caseInsensitiveStringCompare(dealInput, "Y") )
-							{//If the user said yes, deal a card.
-								//Finish this code later
-								std::cout << "This feature is still under construction." << std::endl;
-							}
-							else if( !caseInsensitiveStringCompare(dealInput, "N") )
-							{//If the user didn't specify yes (previous if statement) or no (this if statement), give the user an error.
-								std::cerr << "Please input the character y or the character n." << std::endl;
-							}
-						}while( !caseInsensitiveStringCompare(dealInput, "Y") && !caseInsensitiveStringCompare(dealInput, "N") )
-					}
+					//if( *itr.getMaxPointsAtOrBelow21() < 21 )
+					//{//If the points for this hand are below 21, see if the user wants to keep going.
+
+					//Ask if the user wants to deal another card.
+					std::string dealInput;
+					do
+					{//Keep looping until get a y or a n from the user.
+						std::cout << *itr << std::endl;
+						std::cout << "Do you want to hit or stand? (h/s) ";
+						std::cin >> dealInput;
+
+						if( caseInsensitiveStringCompare(dealInput, "h") )
+						{//If the user said yes, deal a card.
+							//Finish this code later
+							//std::cout << "This feature is still under construction." << std::endl;
+							(*itr).addCard( myDealer->getRandomCard() );//Put in a random card.
+						}
+						else if( caseInsensitiveStringCompare(dealInput, "s") )
+						{//User selected stand, so done with this hand.
+							doneWithThisHand = true;
+						}
+						else
+						{//If the user didn't specify hit or stand, give the user an error.
+							std::cerr << "Please input the character y or the character n." << std::endl;
+						}
+					}while( !caseInsensitiveStringCompare(dealInput, "h") && !caseInsensitiveStringCompare(dealInput, "s") );
+					//}
 				}
+				
+				//Print out the hand at the end of the play
+				std::cout << "This hand: " << std::endl;
+				std::cout << *itr << std::endl;//Print out the hand to the user.
+				std::cout << "Points: " << *itr.getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
 			}
 		}
 		else
