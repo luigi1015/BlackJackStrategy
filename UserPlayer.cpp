@@ -58,8 +58,6 @@ namespace Blackjack
 		if( getMoney() > 0 )
 		{//If the user has money left, let the user play.
 			//long bet = 0;//The amount of money the user wants to bet.
-			
-			//TODO: Change bet to set the bet value in hand rather than the long value above.
 
 			if( collHands.numHands()  == 0 )
 			{//If there aren't any hands yet, create the first one so that play can start.
