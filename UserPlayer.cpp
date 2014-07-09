@@ -191,7 +191,7 @@ namespace Blackjack
 	}
 
 	int UserPlayer::askQuit()
-	{//Asks the user whether to quit and returns an int of value from playReturnValues based on the answer.struct playReturnValues { quitPlaying, keepPlaying }
+	{//Asks the user whether to quit and returns an int of value from playReturnValues based on the answer.
 		std::string input;
 		do
 		{//Keep asking for input until you get a valid answer.

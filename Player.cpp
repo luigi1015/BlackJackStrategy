@@ -27,7 +27,8 @@ namespace Blackjack
 			//void addHand( Hand newHand );//Add a hand to the end of the list;
 			//void addHand( Hand newHand, size_t n );//Add a hand at location n. n should be between 0 and numHands()-1, inclusive.
 			//void clearHands();//Remove all the hands.
-			virtual int play();//Virtual method for this player to play Blackjack. Returns an int of value from playReturnValues to tell the dealer if it wants to continue or stop.
+			virtual void play();//Virtual method for this player to play Blackjack.
+			virtual int askQuit();//Rerturns an int of value from playReturnValues based on whether the user wants to quit or keep playing.
 			void getRandomCard( iterator iteratorPosition );//Gets a random card for the hand pointed to by iteratorPosition.
 			void setName( std::string newName );//Sets the name of the player.
 			std::string getName();//Returns the name of the player.

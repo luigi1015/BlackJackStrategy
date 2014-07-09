@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include "Hand.h"
+//#include "Player.h"
 #include "UserPlayer.h"
 #include "AutoPlayer.h"
 #include "Random-Cpp/random.cpp"
@@ -24,6 +25,8 @@ namespace Blackjack
 			void addAutoPlayer( std::string newName );//Registers a new automatic player for the game. newName is the name of the new player.
 			Card getRandomCard();//Returns a randomly valued card.
 			Card getDealerCard();//Returns one of the dealer's card for the player to see.
+			void play();//Play a hand as the dealer.
+			int askQuit();//Just returns keep playing every time.
 	};
 }
 

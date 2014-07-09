@@ -16,6 +16,7 @@ namespace Blackjack
 			void addUserPlayer( std::string newName );//Registers a new user's player for the game. newName is the name of the new player.
 			void addAutoPlayer( std::string newName );//Registers a new automatic player for the game. newName is the name of the new player.
 			Card getRandomCard();//Returns a randomly valued card.
+			void play();//Play a hand as the dealer.
 	};
 }
 */
@@ -42,6 +43,35 @@ namespace Blackjack
 
 	void Dealer::startGame()
 	{//Starts the players playing.
+		while( players.size() > 0 )
+		{
+			std::vector<Player*>::iterator pit
+
+			for( pit = players.begin(); pit != players.end(); pit++ )
+			{//Go through the players and have each them play a hand.
+				(*pit)->play();
+			}
+
+			//Play a hand as the dealer.
+			play();
+
+			pit = players.begin();
+			while( pit != players.end() )
+			{//Go through the players and count up the winnings/losses and ask each if they want to quit.
+				
+				std::cout << "Winnings and losses to be programmed later..." << std::endl;
+				//TODO: finish the calculations of winnings and losses.
+				
+				if( (*pit)->askQuit() == playReturnValues.quitPlaying )
+				{//Ask if the player wants to quit.
+					pit = players.erase( pit );//Erase the plaer and get the new iterator.
+				}
+				else
+				{//The player didn't want to quit, so just move on.
+					pit++;
+				}
+			}
+		}
 	}
 
 	void Dealer::addUserPlayer( std::string newName )
@@ -63,5 +93,16 @@ namespace Blackjack
 	Card Dealer::getDealerCard()
 	{//Returns one of the dealer's card for the player to see.
 		return (*collHands.begin()).getCard(1);//Return the first card of the first hand.
+	}
+
+	void Dealer::play()
+	{//Play a hand as the dealer.
+		std::cout << "The dealer doesn't know how to play yet." << std::endl;
+		//TODO: finish this method.
+	}
+
+	int Dealer::askQuit()
+	{//Just returns keep playing every time.
+		return playReturnValues.keepPlaying;
 	}
 }
