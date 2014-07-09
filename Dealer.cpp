@@ -97,8 +97,38 @@ namespace Blackjack
 
 	void Dealer::play()
 	{//Play a hand as the dealer.
-		std::cout << "The dealer doesn't know how to play yet." << std::endl;
-		//TODO: finish this method.
+		if( collHands.numHands()  == 0 )
+		{//If there aren't any hands yet, create the first one so that play can start.
+			Hand newHand;//Create the hand object itself.
+			newHand.addCard( myDealer->getRandomCard() );//Get the first random card of the hand.
+			newHand.addCard( myDealer->getRandomCard() );//Get the second random card of the hand.
+			collHands.addHand( newHand );//Add the new hand to the collection of hands.
+		}
+			
+		for( HandList::iterator itr = collHands.begin(); itr != collHands.end(); itr++ )
+		{//Play each hand by iteration through them.
+			bool doneWithThisHand = false;//Used to keep track of wether the dealer has decided to stop playing this hand.
+				
+			while( (doneWithThisHand != true) && (*itr.getMaxPointsAtOrBelow21() < 21) )
+			{//While the dealer hasn't decided to stop playing this hand and the hand is below 21 points, keep playing this hand.
+				std::cout << "Dealer's hand: " << *itr << std::endl;//Print out the hand.
+				std::cout << "Dealer's points: " << *itr.getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points.
+
+				if( *itr.getMaxPointsAtOrBelow21() < 17 )
+				{//If the points for this hand are below 17, hit.
+					(*itr).addCard( myDealer->getRandomCard() );//Put in a random card.
+				}
+				else
+				{//The dealer wants to stand, so done with this hand.
+					doneWithThisHand = true;
+				}
+			}
+				
+			//Print out the hand at the end of the play
+			std::cout << "Dealer's hand: " << std::endl;
+			std::cout << *itr << std::endl;//Print out the hand.
+			std::cout << "Dealer's points: " << (*itr).getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points.
+		}
 	}
 
 	int Dealer::askQuit()
