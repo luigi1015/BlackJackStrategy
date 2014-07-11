@@ -45,6 +45,8 @@ namespace Blackjack
 			long getMoney();//Returns the amount of money the player has.
 			long addMoney( long newMoney );//Adds newMoney of money to the amount the player has and returns the updated amount.
 			long subtractMoney( long newMoney );//Subtracts newMoney of money from the amount the player has and returns the updated amount.
+			HandList::iterator Player::handsBegin();//An iterator for the beginning of the player's hands.
+			HandList::iterator Player::handsEnd();//An iterator for the end of the player's hands.
 	};
 }
 
