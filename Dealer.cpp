@@ -13,9 +13,9 @@ namespace Blackjack
 			~Dealer();//Default Destructor. Frees all the player pointers.
 			//void deal();//Deal cards to players.
 			void startGame();//Starts the players playing.
-			void addUserPlayer( std::string newName );//Registers a new user's player for the game. newName is the name of the new player.
-			void addAutoPlayer( std::string newName );//Registers a new automatic player for the game. newName is the name of the new player.
-			Card getRandomCard();//Returns a randomly valued card.
+			void addUserPlayer( unsigned int newID, std::string newName );//Registers a new user's player for the game. newName and newID are the name and ID of the new player.
+			void addAutoPlayer( unsigned int newID, std::string newName );//Registers a new automatic player for the game. newName and newID are the name and ID of the new player.
+			//Card getRandomCard();//Returns a randomly valued card.
 			void play();//Play a hand as the dealer.
 	};
 }
@@ -133,14 +133,16 @@ namespace Blackjack
 		}
 	}
 
-	void Dealer::addUserPlayer( std::string newName )
-	{//Registers a new user's player for the game. newName is the name of the new player.
-		players.push_back( new UserPlayer(newName) );
+	void Dealer::addUserPlayer( unsigned int newID, std::string newName )
+	{//Registers a new user's player for the game. newName is the name of the new player. newID is the player's ID. "this" is the dealer, this object.
+		//players.push_back( new UserPlayer(newID, newName, this) );
+		players.push_back( new UserPlayer(newID, newName) );
 	}
 
-	void Dealer::addAutoPlayer( std::string newName )
-	{//Registers a new automatic player for the game. newName is the name of the new player.
-		players.push_back( new AutoPlayer(newName) );
+	void Dealer::addAutoPlayer( unsigned int newID, std::string newName )
+	{//Registers a new automatic player for the game. newName is the name of the new player. newID is the player's ID. "this" is the dealer, this object.
+		//players.push_back( new AutoPlayer(newID, newName, this) );
+		players.push_back( new AutoPlayer(newID, newName) );
 	}
 
 	Card Dealer::getRandomCard()

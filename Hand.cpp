@@ -216,7 +216,7 @@ namespace Blackjack
 		}
 		out << std::endl;
 		
-		out << "Bet: " << getBet() << std::endl;
+		out << "Bet: " << h.getBet() << std::endl;
 
 		return out;
 	}
