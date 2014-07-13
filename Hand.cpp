@@ -172,7 +172,7 @@ namespace Blackjack
 		return ( (getNumCards() == 2) && (cards.at(0).getRank() == cards.at(1).getRank()) );
 	}
 
-	long Hand::getBet()
+	long Hand::getBet() const
 	{//Returns the current bet.
 		return bet;
 	}

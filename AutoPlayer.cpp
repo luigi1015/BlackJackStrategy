@@ -10,7 +10,7 @@ namespace Blackjack
 		public:
 			//AutoPlayer();//Default Constructor.
 			AutoPlayer( unsigned int newID, std::string newName, Dealer* newDealer ) : Player( newID, newName, newDealer );//Constructor with the player's name.
-			int play();//Automatically play blackjack.
+			void play();//Automatically play blackjack.
 			int askQuit();//Returns an int of value from playReturnValues based on whether the player thinks it should quit.
 	};
 }
@@ -24,7 +24,7 @@ namespace Blackjack
 	{//Constructor with the ID, name and dealer
 	}
 
-	int AutoPlayer::play()
+	void AutoPlayer::play()
 	{//Automatically play blackjack.
 		std::cerr << "AutoPlayer hasn't been written yet." << std::endl;
 	}

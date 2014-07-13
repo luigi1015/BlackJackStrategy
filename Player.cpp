@@ -201,7 +201,7 @@ namespace Blackjack
 
 	Card Player::getRandomCard()
 	{//Gets a random card for the hand pointed to by iteratorPosition.
-		Card randomCard( static_cast<Rank>(0,12), static_cast<Suit>(0,3) );//Get a random card
+		Card randomCard( static_cast<Rank>(RNG::generateNumber<int>(0,12)), static_cast<Suit>(RNG::generateNumber<int>(0,3)) );//Get a random card
 		return randomCard;
 	}
 }
