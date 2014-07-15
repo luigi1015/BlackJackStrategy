@@ -35,7 +35,7 @@ HandsIterator.o: HandsIterator.h HandsIterator.cpp
 HandTest: Hand.h Hand.cpp Hand.o HandTest.cpp
 	g++ -g -Wall -o HandTest HandTest.cpp Hand.o Card.o -lcppunit
 
-BlackJack: Player.h Player.cpp Hand.h Hand.cpp AutoPlayer.h AutoPlayer.cpp UserPlayer.h UserPlayer.cpp HandCollection.h HandCollection.cpp Hand.h Hand.cpp Card.h Card.cpp
+BlackJack: Player.h Player.cpp Hand.h Hand.cpp AutoPlayer.h AutoPlayer.cpp UserPlayer.h UserPlayer.cpp HandCollection.h HandCollection.cpp Hand.h Hand.cpp Card.h Card.cpp AutoStrategy.h
 	g++ -g -Wall -std=c++11 Player.h Player.cpp Hand.h Hand.cpp AutoPlayer.h AutoPlayer.cpp UserPlayer.h UserPlayer.cpp HandCollection.h HandCollection.cpp Hand.h Hand.cpp Card.h Card.cpp main.cpp -o BlackJack
 
 #HandsIteratorTest: Hand.h Hand.cpp Hand.o Card.h Card.cpp Card.o HandsIterator.h HandsIterator.cpp HandsIterator.o HandCollection.h HandCollection.cpp HandCollection.o Player.h Player.cpp Player.o HandsIteratorTest.cpp

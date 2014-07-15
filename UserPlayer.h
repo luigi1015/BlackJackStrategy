@@ -11,9 +11,9 @@ namespace Blackjack
 		private:
 
 		public:
-			UserPlayer( unsigned int newID ) : Player( newID );//Constructor with only the ID.
-			UserPlayer( unsigned int newID, std::string newName ) : Player( newID, newName );//Constructor with the player's name and the ID.
-			UserPlayer( unsigned int newID, std::string newName, Dealer* newDealer ) : Player( newID, newName, newDealer );//Constructor with the player's name, the ID and the Dealer.
+			UserPlayer( unsigned int newID );//Constructor with only the ID.
+			UserPlayer( unsigned int newID, std::string newName );//Constructor with the player's name and the ID.
+			//UserPlayer( unsigned int newID, std::string newName, Dealer* newDealer );//Constructor with the player's name, the ID and the Dealer.
 			void play();//Play one round of blackjack with user input. Returns an int of value from playReturnValues to tell the dealer if it wants to continue or stop.
 			int askQuit();//Asks the user whether to quit and returns an int of value from playReturnValues based on the answer.
 	};

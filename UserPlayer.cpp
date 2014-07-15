@@ -1,4 +1,4 @@
-#include UserPlayer.h
+#include "UserPlayer.h"
 #include <stdexcept>
 #include <iostream>
 #include <string>
@@ -16,7 +16,7 @@ namespace Blackjack
 		public:
 			UserPlayer( unsigned int newID ) : Player( newID );//Constructor with only the ID.
 			UserPlayer( unsigned int newID, std::string newName ) : Player( newID, newName );//Constructor with the player's name and the ID.
-			UserPlayer( unsigned int newID, std::string newName, Dealer* newDealer ) : Player( newID, newName, newDealer );//Constructor with the player's name, the ID and the Dealer.
+			//UserPlayer( unsigned int newID, std::string newName, Dealer* newDealer ) : Player( newID, newName, newDealer );//Constructor with the player's name, the ID and the Dealer.
 			void play();//Play one round of blackjack with user input.
 			int askQuit();//Asks the user whether to quit and returns an int of value from playReturnValues based on the answer.
 	};
@@ -42,11 +42,11 @@ namespace Blackjack
 	UserPlayer::UserPlayer( unsigned int newID, std::string newName ) : Player( newID, newName )
 	{//Constructor with the player's name and the ID.
 	}
-
+/*
 	UserPlayer::UserPlayer( unsigned int newID, std::string newName, Dealer* newDealer ) : Player( newID, newName, newDealer )
 	{//Constructor with the player's name, the ID and the Dealer.
 	}
-
+*/
 	void UserPlayer::play()
 	{//Play one round of blackjack with user input.
 		if( myDealer == NULL )

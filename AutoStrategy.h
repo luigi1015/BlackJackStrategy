@@ -10,7 +10,7 @@ namespace Blackjack
 		private:
 
 		public:
-			enum Decision { Bet, Stand, DoubleDown, Split );
+			enum Decision { Bet, Stand, DoubleDown, Split };
 			virtual int decide( Card dealerCard, HandCollection playerCards ) const;//Takes the dealer's card, the player's cards, decide what to do, and return the appropriate Decision value.
 	};
 }
