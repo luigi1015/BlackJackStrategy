@@ -1,6 +1,4 @@
 /*
-#include "Player.h"
-
 namespace Blackjack
 {
 	class AutoPlayer: public Player

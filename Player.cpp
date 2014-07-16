@@ -1,6 +1,7 @@
 #include "Player.h"
 #include <stdexcept>
 #include <iostream>
+#include "Random-Cpp/random.cpp"
 
 /*
 namespace Blackjack

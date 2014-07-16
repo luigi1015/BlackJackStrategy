@@ -3,6 +3,16 @@
 #include <stdlib.h> 
 #include "Dealer.h"
 
+inline bool caseInsensitiveCharacterCompare( char first, char second )
+{//Compare two characters, returns true if they're equal, false if they're not.
+	return std::toupper(first) == std::toupper(second);
+}
+
+bool caseInsensitiveStringCompare( const std::string& first,  const std::string& second )
+{
+	return (first.size() == second.size()) && equal(first.begin(), first.end(), second.begin(), caseInsensitiveCharacterCompare);
+}
+
 int main()
 {
 	std::string input;//A temporary holder of user input.
@@ -50,7 +60,7 @@ int main()
 				dealer.addAutoPlayer( ++maxUsedPlayerID, playerName );
 			}
 		}
-		else if( numComputerPlayers = 0 )
+		else if( numComputerPlayers == 0 )
 		{//If the user entered 0, don't add any AutoPlayers.
 			std::cout << "There will be no computer players this game." << std::endl;
 		}

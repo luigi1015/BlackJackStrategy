@@ -3,11 +3,11 @@
 
 #include <vector>
 #include <string>
-#include "Hand.h"
+//#include "Hand.h"
 //#include "Player.h"
 #include "UserPlayer.h"
 #include "AutoPlayer.h"
-#include "Random-Cpp/random.cpp"
+//#include "Random-Cpp/random.cpp"
 
 namespace Blackjack
 {

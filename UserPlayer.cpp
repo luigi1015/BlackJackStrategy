@@ -49,29 +49,23 @@ namespace Blackjack
 */
 	void UserPlayer::play()
 	{//Play one round of blackjack with user input.
-		if( myDealer == NULL )
-		{//Check to make sure the dealer is set. If not, error out.
-			std::cerr << "Started the play method of UserPlayer without a set dealer." << std::endl;
-			throw std::runtime_error( "Started the play method of UserPlayer without a set dealer." );
-		}
-
 		if( getMoney() > 0 )
 		{//If the user has money left, let the user play.
-			//long bet = 0;//The amount of money the user wants to bet.
 
 			if( collHands.numHands()  == 0 )
 			{//If there aren't any hands yet, create the first one so that play can start.
 				Hand newHand;//Create the hand object itself.
-				newHand.addCard( myDealer->getRandomCard() );//Get the first random card of the hand.
-				newHand.addCard( myDealer->getRandomCard() );//Get the second random card of the hand.
+				newHand.addCard( getRandomCard() );//Get the first random card of the hand.
+				newHand.addCard( getRandomCard() );//Get the second random card of the hand.
 				collHands.addHand( newHand );//Add the new hand to the collection of hands.
 			}
 			
-			for( HandList::iterator itr = collHands.begin(); itr != collHands.end(); itr++ )
+			for( HandCollection::HandList::iterator itr = collHands.begin(); itr != collHands.end(); itr++ )
 			{//Play each hand by iteration through them.
 				bool doneWithThisHand = false;//Used to keep track of wether the user has decided to stop playing this hand.
 				//bet = 0;//Reset the bet.
 
+				std::string input;
 				while( ((*itr).getBet() <= 0) || ((*itr).getBet() > getMoney()) )
 				{//Keep asking for a bet until you get a valid one (bet needs to be a positive number less than or equal to the amount of money the player has.
 					long tempBet;//Temporary variable to hold the value of the bet temporarily.
@@ -97,7 +91,7 @@ namespace Blackjack
 					do
 					{//Keep looping until get a y or a n from the user.
 						std::cout << *itr << std::endl;//Print out the hand to the user.
-						std::cout << "Points: " << *itr.getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
+						std::cout << "Points: " << (*itr).getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
 						std::cout << "Money: " << getMoney() << std::endl;//Print out the amount of money the user has.
 						std::cout << "Do you want to double down? (y/n) ";
 						std::cin >> doubleDownInput;
@@ -113,7 +107,7 @@ namespace Blackjack
 						{//If the user didn't specify yes (previous if statement) or no (this if statement), give the user an error.
 							std::cerr << "Please input the character y or the character n." << std::endl;
 						}
-					}while( !caseInsensitiveStringCompare(splitInput, "Y") && !caseInsensitiveStringCompare(splitInput, "N") );
+					}while( !caseInsensitiveStringCompare(doubleDownInput, "Y") && !caseInsensitiveStringCompare(doubleDownInput, "N") );
 				}
 				else
 				{//Let the user know the user can't souble down.
@@ -127,7 +121,7 @@ namespace Blackjack
 					do
 					{//Keep looping until get a y or a n from the user.
 						std::cout << *itr << std::endl;//Print out the hand to the user.
-						std::cout << "Points: " << *itr.getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
+						std::cout << "Points: " << (*itr).getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
 						std::cout << "This hand can be split. Do you want to split the hand? (y/n) ";
 						std::cin >> splitInput;
 
@@ -144,10 +138,10 @@ namespace Blackjack
 					}while( !caseInsensitiveStringCompare(splitInput, "Y") && !caseInsensitiveStringCompare(splitInput, "N") );
 				}
 					
-				while( (doneWithThisHand != true) && (*itr.getMaxPointsAtOrBelow21() < 21) )
+				while( (doneWithThisHand != true) && ((*itr).getMaxPointsAtOrBelow21() < 21) )
 				{//While  the user hasn't decided to stop playing this hand and the hand is below 21 points, keep playing this hand.
 					std::cout << *itr << std::endl;//Print out the hand to the user.
-					std::cout << "Points: " << *itr.getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
+					std::cout << "Points: " << (*itr).getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
 
 					//if( *itr.getMaxPointsAtOrBelow21() < 21 )
 					//{//If the points for this hand are below 21, see if the user wants to keep going.
@@ -164,7 +158,7 @@ namespace Blackjack
 						{//If the user said yes, deal a card.
 							//Finish this code later
 							//std::cout << "This feature is still under construction." << std::endl;
-							(*itr).addCard( myDealer->getRandomCard() );//Put in a random card.
+							(*itr).addCard( getRandomCard() );//Put in a random card.
 						}
 						else if( caseInsensitiveStringCompare(dealInput, "s") )
 						{//User selected stand, so done with this hand.
@@ -199,11 +193,13 @@ namespace Blackjack
 			std::cin >> input;
 			if( caseInsensitiveStringCompare(input, "Y") )
 			{//If the user entered Y for yes, return quitPlaying
-				return playReturnValues.quitPlaying;
+				//return playReturnValues.quitPlaying;
+				return quitPlaying;
 			}
 			else if( caseInsensitiveStringCompare(input, "N") )
 			{//If the user entered N for no, return keepPlaying
-				return playReturnValues.keepPlaying;
+				//return playReturnValues.keepPlaying;
+				return keepPlaying;
 			}
 			else
 			{//Invalid response. Give an error.
@@ -213,6 +209,7 @@ namespace Blackjack
 		
 		//Execution shouldn't get here, but in case the compiler will complian about the possibility of ending the method without a return value I'll put a default.
 		std::cerr << "Something unexpected happened in UserPlayer::askQuit(), quitting." << std::endl;
-		return playReturnValues.quitPlaying;
+		//return playReturnValues.quitPlaying;
+		return quitPlaying;
 	}
 }

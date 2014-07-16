@@ -7,7 +7,7 @@ namespace Blackjack
 {
 	class AutoStrategy
 	{//A Blackjack player that automatically plays without user input.
-		private:
+		protected:
 
 		public:
 			enum Decision { Bet, Stand, DoubleDown, Split };

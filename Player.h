@@ -7,7 +7,7 @@
 //#include "Dealer.h"
 //#include <vector>
 #include <string>
-#include "Random-Cpp/random.cpp"
+//#include "Random-Cpp/random.cpp"
 
 class Dealer;//To avoid having to include Dealer.h, possibly causing an include loop.
 
@@ -15,7 +15,7 @@ namespace Blackjack
 {
 	class Player
 	{//A Blackjack player.
-		private:
+		protected:
 			//std::vector<Hand> hands;//Put the hand in a vector since there could be more than one due to a split.
 			HandCollection collHands;
 			std::string name;
