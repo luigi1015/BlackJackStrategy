@@ -39,7 +39,7 @@ int main()
 		{//Invalid response. Give an error.
 			std::cerr << "Your answer on whether to play wasn't recognized, please try again." << std::endl;
 		}
-	}while( caseInsensitiveStringCompare(input, "Y") || caseInsensitiveStringCompare(input, "N") );
+	}while( !caseInsensitiveStringCompare(input, "Y") && !caseInsensitiveStringCompare(input, "N") );
 
 	//Ask about the computer players and add one or more if neccesary.
 	int numComputerPlayers = 0;

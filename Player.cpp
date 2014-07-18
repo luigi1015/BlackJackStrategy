@@ -51,6 +51,11 @@ namespace Blackjack
 
 namespace Blackjack
 {
+	Player::Player()
+	{//Default Constructor.
+		setID( 0 );
+	}
+
 	Player::Player( unsigned int newID )
 	{//Constructor with the ID.
 		//myDealer = 0;
@@ -62,6 +67,10 @@ namespace Blackjack
 		//myDealer = 0;
 		setID( newID );
 		setName( newName );
+	}
+
+	Player::~Player()
+	{//Default destructor
 	}
 /*
 	Player::Player( unsigned int newID, std::string newName, Dealer* newDealer )
@@ -204,5 +213,19 @@ namespace Blackjack
 	{//Gets a random card for the hand pointed to by iteratorPosition.
 		Card randomCard( static_cast<Rank>(RNG::generateNumber<int>(0,12)), static_cast<Suit>(RNG::generateNumber<int>(0,3)) );//Get a random card
 		return randomCard;
+	}
+
+	void Player::play()
+	{//Virtual method for this player to play Blackjack.
+	}
+
+	int Player::askQuit()
+	{//Rerturns an int of value from playReturnValues based on whether the user wants to quit or keep playing.
+		return quitPlaying;
+	}
+
+	void Player::clearHands()
+	{//Clear the player's hands.
+		collHands.clearHands();
 	}
 }

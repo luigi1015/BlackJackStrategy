@@ -25,8 +25,10 @@ namespace Blackjack
 
 		public:
 			enum playReturnValues { quitPlaying, keepPlaying };//Return values for the play method. quitPlaying will tell the dealer that the player wants to stop while keepPlaying will tell the dealer that the player wants to continue.
+			Player();//Default Constructor.
 			Player( unsigned int newID );//Constructor with the ID.
 			Player( unsigned int newID, std::string newName );//Constructor with the ID and the name.
+			virtual ~Player();//Default destructor
 			//Player( unsigned int newID, std::string newName, Dealer* newDealer );//Constructor with the ID, the name and the dealer.
 			//size_t numHands() const;//Returns the number of hands the player currently has.
 			//Hand& getHand( size_t n );//Returns the hand at location n. n should be between 0 and numHands()-1, inclusive.
@@ -52,6 +54,7 @@ namespace Blackjack
 			HandCollection::HandList::iterator handsBegin();//An iterator for the beginning of the player's hands.
 			HandCollection::HandList::iterator handsEnd();//An iterator for the end of the player's hands.
 			Card getRandomCard();//Returns a randomly valued card.
+			void clearHands();//Clear the player's hands.
 	};
 }
 

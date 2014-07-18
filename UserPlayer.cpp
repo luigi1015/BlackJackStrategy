@@ -80,7 +80,7 @@ namespace Blackjack
 					else
 					{//The bet is valid, set the bet and take the bet out of the player's money..
 						(*itr).setBet( tempBet );
-						money -= tempBet;
+						//money -= tempBet;
 					}
 				}
 
@@ -99,8 +99,9 @@ namespace Blackjack
 						if( caseInsensitiveStringCompare(doubleDownInput, "Y") )
 						{//If the user said yes, double down and take the additional bet amount out of the player's money.
 							//bet *= 2;
-							money -= (*itr).getBet();
+							//money -= (*itr).getBet();
 							(*itr).doubleBet();
+							(*itr).addCard( getRandomCard() );//Put in a random card.
 							doneWithThisHand = true;
 						}
 						else if( !caseInsensitiveStringCompare(doubleDownInput, "N") )

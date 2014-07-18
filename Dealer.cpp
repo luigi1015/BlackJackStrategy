@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Dealer.h"
 
 /*
@@ -43,10 +44,15 @@ namespace Blackjack
 
 	void Dealer::startGame()
 	{//Starts the players playing.
+		std::vector<Player*>::iterator pit;
+
+		for( pit = players.begin(); pit != players.end(); pit++ )
+		{//Go through the players and give them some betting money.
+			(*pit)->setMoney(1000);
+		}
+
 		while( players.size() > 0 )
 		{
-			std::vector<Player*>::iterator pit
-
 			for( pit = players.begin(); pit != players.end(); pit++ )
 			{//Go through the players and have each them play a hand.
 				(*pit)->play();
@@ -62,17 +68,17 @@ namespace Blackjack
 				//TODO: check the calculations of winnings and losses, i was tired when i wrote this.
 				if( collHands.getHand( 0 ).isBust() )
 				{//The dealer bust, calculate winnings accordingly.
-					for( HandList::iterator hand = (*pit)->handsBegin(); hand != (*pit)->handsEnd(); hand++ )
+					for( HandCollection::HandList::iterator hand = (*pit)->handsBegin(); hand != (*pit)->handsEnd(); hand++ )
 					{//Go throuch each hand of the player.
 						if( (*hand).isBlackJack() )
 						{//If the hand is a blackjack, give 1.5 times the bet.
-							(*pit)->addMoney( 1.5 * (*hand)->getBet() );
-							std:: cout << "Player " << (*pit)->getName() << " won " << (1.5 * (*hand)->getBet()) << std::endl;
+							(*pit)->addMoney( 1.5 * (*hand).getBet() );
+							std:: cout << "Player " << (*pit)->getName() << " won " << (1.5 * (*hand).getBet()) << std::endl;
 						}
 						else if( !(*hand).isBust() )
 						{//If the hand isn't a blackjack or a bust, give the bet to the player.
 							(*pit)->addMoney( (*pit)->getMoney() );
-							std:: cout << "Player " << (*pit)->getName() << " won " << (*hand)->getBet() << std::endl;
+							std:: cout << "Player " << (*pit)->getName() << " won " << (*hand).getBet() << std::endl;
 						}
 						else
 						{//If the hand is a bust don't give or take away any money.
@@ -82,7 +88,7 @@ namespace Blackjack
 				}
 				else if( collHands.getHand( 0 ).isBlackJack() )
 				{//The dealer got a blackjack, calculate winnings accordingly.
-					for( HandList::iterator hand = (*pit)->handsBegin(); hand != (*pit)->handsEnd(); hand++ )
+					for( HandCollection::HandList::iterator hand = (*pit)->handsBegin(); hand != (*pit)->handsEnd(); hand++ )
 					{//Go throuch each hand of the player.
 						if( (*hand).isBlackJack() )
 						{//If the hand is a blackjack, push.
@@ -90,29 +96,29 @@ namespace Blackjack
 						}
 						else
 						{//If the hand isn't a blackjack take away the bet.
-							(*pit)->subtractMoney( (*hand)->getBet() );
-							std:: cout << "Player " << (*pit)->getName() << " lost " << (*hand)->getBet() << std::endl;
+							(*pit)->subtractMoney( (*hand).getBet() );
+							std:: cout << "Player " << (*pit)->getName() << " lost " << (*hand).getBet() << std::endl;
 						}
 					}
 				}
 				else 
 				{//The dealer didn't bust or get a blackjack, calculate winnings accordingly.
-					for( HandList::iterator hand = (*pit)->handsBegin(); hand != (*pit)->handsEnd(); hand++ )
+					for( HandCollection::HandList::iterator hand = (*pit)->handsBegin(); hand != (*pit)->handsEnd(); hand++ )
 					{//Go throuch each hand of the player.
 						if( (*hand).isBlackJack() )
 						{//If the hand is a blackjack, give 1.5 times the bet.
-							(*pit)->addMoney( 1.5 * (*hand)->getBet() );
-							std:: cout << "Player " << (*pit)->getName() << " won " << (1.5 * (*hand)->getBet()) << std::endl;
+							(*pit)->addMoney( 1.5 * (*hand).getBet() );
+							std:: cout << "Player " << (*pit)->getName() << " won " << (1.5 * (*hand).getBet()) << std::endl;
 						}
 						else if( !(*hand).isBust() && ((*hand).getMaxPointsAtOrBelow21() > collHands.getHand(0).getMaxPointsAtOrBelow21()) )
 						{//If the hand isn't a blackjack or a bust and has more points than the dealer, give the bet to the player.
-							(*pit)->addMoney( (*hand)->getBet() );
-							std:: cout << "Player " << (*pit)->getName() << " won " << (*hand)->getBet() << std::endl;
+							(*pit)->addMoney( (*hand).getBet() );
+							std:: cout << "Player " << (*pit)->getName() << " won " << (*hand).getBet() << std::endl;
 						}
 						else if( !(*hand).isBust() && ((*hand).getMaxPointsAtOrBelow21() < collHands.getHand(0).getMaxPointsAtOrBelow21()) )
 						{//If the hand isn't a blackjack or a bust and has fewer points than the dealer, take the bet away from the player.
-							(*pit)->subtractMoney( (*hand)->getBet() );
-							std:: cout << "Player " << (*pit)->getName() << " lost " << (*hand)->getBet() << std::endl;
+							(*pit)->subtractMoney( (*hand).getBet() );
+							std:: cout << "Player " << (*pit)->getName() << " lost " << (*hand).getBet() << std::endl;
 						}
 						else
 						{//If the hand is a bust don't give or take away any money.
@@ -120,8 +126,11 @@ namespace Blackjack
 						}
 					}
 				}
+
+				//Clear the player's hands.
+				(*pit)->clearHands();
 				
-				if( (*pit)->askQuit() == playReturnValues.quitPlaying )
+				if( (*pit)->askQuit() == Player::quitPlaying )
 				{//Ask if the player wants to quit.
 					pit = players.erase( pit );//Erase the plaer and get the new iterator.
 				}
@@ -162,23 +171,23 @@ namespace Blackjack
 		if( collHands.numHands()  == 0 )
 		{//If there aren't any hands yet, create the first one so that play can start.
 			Hand newHand;//Create the hand object itself.
-			newHand.addCard( myDealer->getRandomCard() );//Get the first random card of the hand.
-			newHand.addCard( myDealer->getRandomCard() );//Get the second random card of the hand.
+			newHand.addCard( getRandomCard() );//Get the first random card of the hand.
+			newHand.addCard( getRandomCard() );//Get the second random card of the hand.
 			collHands.addHand( newHand );//Add the new hand to the collection of hands.
 		}
 			
-		for( HandList::iterator itr = collHands.begin(); itr != collHands.end(); itr++ )
+		for( HandCollection::HandList::iterator itr = collHands.begin(); itr != collHands.end(); itr++ )
 		{//Play each hand by iteration through them.
 			bool doneWithThisHand = false;//Used to keep track of wether the dealer has decided to stop playing this hand.
 				
-			while( (doneWithThisHand != true) && (*itr.getMaxPointsAtOrBelow21() < 21) )
+			while( (doneWithThisHand != true) && ((*itr).getMaxPointsAtOrBelow21() < 21) )
 			{//While the dealer hasn't decided to stop playing this hand and the hand is below 21 points, keep playing this hand.
 				std::cout << "Dealer's hand: " << *itr << std::endl;//Print out the hand.
-				std::cout << "Dealer's points: " << *itr.getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points.
+				std::cout << "Dealer's points: " << (*itr).getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points.
 
-				if( *itr.getMaxPointsAtOrBelow21() < 17 )
+				if( (*itr).getMaxPointsAtOrBelow21() < 17 )
 				{//If the points for this hand are below 17, hit.
-					(*itr).addCard( myDealer->getRandomCard() );//Put in a random card.
+					(*itr).addCard( getRandomCard() );//Put in a random card.
 				}
 				else
 				{//The dealer wants to stand, so done with this hand.
@@ -195,6 +204,6 @@ namespace Blackjack
 
 	int Dealer::askQuit()
 	{//Just returns keep playing every time.
-		return playReturnValues.keepPlaying;
+		return Player::keepPlaying;
 	}
 }

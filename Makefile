@@ -21,7 +21,10 @@ HandCollectionTest: HandCollection.h HandCollection.cpp HandCollection.o HandCol
 	g++ -g -Wall -o HandCollectionTest HandCollection.o Hand.o Card.o HandCollectionTest.cpp -lcppunit
 
 Player.o: Player.h Player.cpp
-	g++ -g -Wall -c Player.cpp
+	g++ -g -Wall -std=c++11 -c Player.cpp
+
+Dealer.o: Dealer.h Dealer.cpp
+	g++ -g -Wall -c Dealer.cpp
 
 UserPlayer.o: UserPlayer.h UserPlayer.cpp
 	g++ -g -Wall -c UserPlayer.cpp
@@ -35,8 +38,11 @@ HandsIterator.o: HandsIterator.h HandsIterator.cpp
 HandTest: Hand.h Hand.cpp Hand.o HandTest.cpp
 	g++ -g -Wall -o HandTest HandTest.cpp Hand.o Card.o -lcppunit
 
-BlackJack: Player.h Player.cpp Hand.h Hand.cpp AutoPlayer.h AutoPlayer.cpp UserPlayer.h UserPlayer.cpp HandCollection.h HandCollection.cpp Hand.h Hand.cpp Card.h Card.cpp AutoStrategy.h
-	g++ -g -Wall -std=c++11 Player.h Player.cpp Hand.h Hand.cpp AutoPlayer.h AutoPlayer.cpp UserPlayer.h UserPlayer.cpp HandCollection.h HandCollection.cpp Hand.h Hand.cpp Card.h Card.cpp main.cpp -o BlackJack
+#BlackJack: Player.h Player.cpp AutoPlayer.h AutoPlayer.cpp UserPlayer.h UserPlayer.cpp HandCollection.h HandCollection.cpp Hand.h Hand.cpp Card.h Card.cpp AutoStrategy.h
+#	g++ -g -Wall -std=c++11 Player.h Player.cpp AutoPlayer.h AutoPlayer.cpp UserPlayer.h UserPlayer.cpp HandCollection.h HandCollection.cpp Hand.h Hand.cpp Card.h Card.cpp main.cpp -o BlackJack
+
+BlackJack: Player.h Player.cpp AutoPlayer.h AutoPlayer.cpp UserPlayer.h UserPlayer.cpp HandCollection.h HandCollection.cpp Hand.h Hand.cpp Card.h Card.cpp AutoStrategy.h main.cpp Dealer.o Player.o Hand.o HandCollection.o UserPlayer.o AutoPlayer.o Card.o
+	g++ -g -Wall -std=c++11 main.cpp Dealer.o Player.o Hand.o HandCollection.o UserPlayer.o AutoPlayer.o Card.o -o BlackJack
 
 #HandsIteratorTest: Hand.h Hand.cpp Hand.o Card.h Card.cpp Card.o HandsIterator.h HandsIterator.cpp HandsIterator.o HandCollection.h HandCollection.cpp HandCollection.o Player.h Player.cpp Player.o HandsIteratorTest.cpp
 #	g++ -g -Wall -o HandsIteratorTest HandsIteratorTest.cpp HandsIterator.o Hand.o Card.o Player.o HandCollection.o -lcppunit
