@@ -1,7 +1,8 @@
 #ifndef AutoStrategy_h
 #define AutoStrategy_h
 
-#include <vector>
+#include "Card.h"
+#include "Hand.h"
 
 namespace Blackjack
 {
@@ -10,8 +11,9 @@ namespace Blackjack
 		protected:
 
 		public:
-			enum Decision { Bet, Stand, DoubleDown, Split };
-			virtual int decide( Card dealerCard, HandCollection playerCards ) const;//Takes the dealer's card, the player's cards, decide what to do, and return the appropriate Decision value.
+			enum Decision { Hit, Stand, DoubleDown, Split };
+			virtual ~AutoStrategy();//Default destructor
+			virtual int decide( Card dealerCard, Hand playerHand ) const;//Takes the dealer's card, the player's cards, decide what to do, and return the appropriate Decision value.
 	};
 }
 

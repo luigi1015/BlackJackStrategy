@@ -17,12 +17,14 @@ namespace Blackjack
 */
 
 #include "AutoPlayer.h"
+#include "InternetRecommendedStrategy.h"
 #include <iostream>
 
 namespace Blackjack
 {
 	AutoPlayer::AutoPlayer( unsigned int newID, std::string newName ) : Player( newID, newName )
 	{//Constructor with the player's name and ID.
+		strategy = new InternetRecommendedStrategy();
 	}
 
 	void AutoPlayer::play()
