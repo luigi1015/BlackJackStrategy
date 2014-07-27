@@ -10,14 +10,16 @@ namespace Blackjack
 			std::vector<Player*> players;//A vector of the players. I have them stored as pointers so that it can store subclasses of Player.
 
 		public:
-			//Dealer();//Default Constructor.
+			Dealer();//Default Constructor.
 			~Dealer();//Default Destructor. Frees all the player pointers.
 			//void deal();//Deal cards to players.
 			void startGame();//Starts the players playing.
 			void addUserPlayer( unsigned int newID, std::string newName );//Registers a new user's player for the game. newName and newID are the name and ID of the new player.
 			void addAutoPlayer( unsigned int newID, std::string newName );//Registers a new automatic player for the game. newName and newID are the name and ID of the new player.
 			//Card getRandomCard();//Returns a randomly valued card.
+			Card getDealerCard();//Returns one of the dealer's card for the player to see.
 			void play();//Play a hand as the dealer.
+			int askQuit();//Just returns keep playing every time.
 	};
 }
 */
@@ -55,6 +57,7 @@ namespace Blackjack
 		{
 			for( pit = players.begin(); pit != players.end(); pit++ )
 			{//Go through the players and have each them play a hand.
+				(*pit)->setDealerCard( collHands.getHand(0).getCard(0) );
 				(*pit)->play();
 			}
 

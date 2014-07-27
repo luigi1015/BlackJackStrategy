@@ -22,6 +22,7 @@ namespace Blackjack
 			//Dealer* myDealer;//The dealer for this game.
 			unsigned int ID;//The programatically generated ID of the payer.
 			long money;//How much money the player has.
+			Card dealerCard;//The dealer's card.
 
 		public:
 			enum playReturnValues { quitPlaying, keepPlaying };//Return values for the play method. quitPlaying will tell the dealer that the player wants to stop while keepPlaying will tell the dealer that the player wants to continue.
@@ -55,6 +56,8 @@ namespace Blackjack
 			HandCollection::HandList::iterator handsEnd();//An iterator for the end of the player's hands.
 			Card getRandomCard();//Returns a randomly valued card.
 			void clearHands();//Clear the player's hands.
+			void setDealerCard( Card dealerCard );//Set the dealer's card to show to the player.
+			Card Player::getDealerCard();//Return's the dealer's card that the player has on record.
 	};
 }
 

@@ -8,18 +8,21 @@ namespace Blackjack
 {
 	class Player
 	{//A Blackjack player.
-		private:
+		protected:
 			//std::vector<Hand> hands;//Put the hand in a vector since there could be more than one due to a split.
 			HandCollection collHands;
 			std::string name;
 			//Dealer* myDealer;//The dealer for this game.
 			unsigned int ID;//The programatically generated ID of the payer.
 			long money;//How much money the player has.
+			Card dealerCard;//The dealer's card.
 
 		public:
 			enum playReturnValues { quitPlaying, keepPlaying };//Return values for the play method. quitPlaying will tell the dealer that the player wants to stop while keepPlaying will tell the dealer that the player wants to continue.
+			Player();//Default Constructor.
 			Player( unsigned int newID );//Constructor with the ID.
 			Player( unsigned int newID, std::string newName );//Constructor with the ID and the name.
+			virtual ~Player();//Default destructor
 			//Player( unsigned int newID, std::string newName, Dealer* newDealer );//Constructor with the ID, the name and the dealer.
 			//size_t numHands() const;//Returns the number of hands the player currently has.
 			//Hand& getHand( size_t n );//Returns the hand at location n. n should be between 0 and numHands()-1, inclusive.
@@ -35,7 +38,7 @@ namespace Blackjack
 			void getRandomCard( HandCollection::HandList::iterator iteratorPosition );//Gets a random card for the hand pointed to by iteratorPosition.
 			void setName( std::string newName );//Sets the name of the player.
 			std::string getName();//Returns the name of the player.
-			void setDealer( Dealer* newDealer );//Set the dealer.
+			//void setDealer( Dealer* newDealer );//Set the dealer.
 			void setID( unsigned int newID );//Set the ID to newID.
 			unsigned int getID();//Returns the ID.
 			long setMoney( long newMoney );//Sets the amount of money the player has and returns that amount.
@@ -44,6 +47,10 @@ namespace Blackjack
 			long subtractMoney( long newMoney );//Subtracts newMoney of money from the amount the player has and returns the updated amount.
 			HandCollection::HandList::iterator handsBegin();//An iterator for the beginning of the player's hands.
 			HandCollection::HandList::iterator handsEnd();//An iterator for the end of the player's hands.
+			Card getRandomCard();//Returns a randomly valued card.
+			void clearHands();//Clear the player's hands.
+			void setDealerCard( Card dealerCard );//Set the dealer's card to show to the player.
+			Card Player::getDealerCard();//Return's the dealer's card that the player has on record.
 	};
 }
 */
@@ -227,5 +234,15 @@ namespace Blackjack
 	void Player::clearHands()
 	{//Clear the player's hands.
 		collHands.clearHands();
+	}
+
+	void Player::setDealerCard( Card newDealerCard )
+	{//Set the dealer's card to show to the player.
+		dealerCard = newDealerCard;
+	}
+
+	Card Player::getDealerCard()
+	{//Return's the dealer's card that the player has on record.
+		return dealerCard;
 	}
 }
