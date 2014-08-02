@@ -18,7 +18,7 @@ namespace Blackjack
 			std::vector<std::string> parseLine( std::string line, std::string delim );//Parse line into tokens separated by delim and return the tokens in a vector.
 
 		public:
-			int decide( Card dealerCard, Hand playerHand ) const;//Takes the dealer's card, the player's cards, decide what to do, and return the appropriate Decision value.
+			int decide( Card dealerCard, Hand playerHand );//Takes the dealer's card, the player's cards, decide what to do, and return the appropriate Decision value.
 			void readRecommendations( std::string recommendationsFilename = "InternetStrategyTable.csv" );//Reads the recommendations from the csv file and populates the recommendations map object accordingly.
 			//std::vector<std::string> parseLine( std::string line, std::string delim );//Parse line into tokens separated by delim and return the tokens in a vector.
 	};

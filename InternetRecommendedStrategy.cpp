@@ -14,7 +14,7 @@ namespace Blackjack
 			std::vector<std::string> parseLine( std::string line, std::string delim );//Parse line into tokens separated by delim and return the tokens in a vector.
 
 		public:
-			int decide( Card dealerCard, Hand playerHand ) const;//Takes the dealer's card, the player's cards, decide what to do, and return the appropriate Decision value.
+			int decide( Card dealerCard, Hand playerHand );//Takes the dealer's card, the player's cards, decide what to do, and return the appropriate Decision value.
 			void readRecommendations( std::string = "InternetStrategyTable.csv" );//Reads the recommendations from the csv file and populates the recommendations map object accordingly.
 	};
 }
@@ -22,7 +22,7 @@ namespace Blackjack
 
 namespace Blackjack
 {
-	int InternetRecommendedStrategy::decide( Card dealerCard, Hand playerHand ) const
+	int InternetRecommendedStrategy::decide( Card dealerCard, Hand playerHand )
 	{//Takes the dealer's card, the player's cards, decide what to do from the recommendations file, and return the appropriate Decision value.
 		std::string handString;//The player's hand as a string, used for looking up the recommendation in the map.
 		Rank dealerRank;//The rank of the dealer's card, used for looking up the recommendation in the map.
@@ -31,9 +31,9 @@ namespace Blackjack
 		readRecommendations();//Read the recommendations from the file.
 		
 		//Get the rank to look up.
-		if( (dealerCard.getRank() == Card::Jack) || (dealerCard.getRank() == Card::Queen) || (dealerCard.getRank() == Card::King) )
+		if( (dealerCard.getRank() == Jack) || (dealerCard.getRank() == Queen) || (dealerCard.getRank() == King) )
 		{//If the card is a face card, use rank 10.
-			mapKey.second = Card::Ten;
+			mapKey.second = Ten;
 		}
 		else
 		{//If the card isn't a facecard, jst use the card's rank.
@@ -43,11 +43,11 @@ namespace Blackjack
 		//Get the hand string
 		if( playerHand.isPair() )
 		{//Put the hand string as "Pair x" where x is the rank of one of the cards.
-			if( (playerHand.getCard(0).getRank() == Card::Jack) || (playerHand.getCard(0).getRank() == Card::Queen) || (playerHand.getCard(0).getRank() == Card::King) )
+			if( (playerHand.getCard(0).getRank() == Jack) || (playerHand.getCard(0).getRank() == Queen) || (playerHand.getCard(0).getRank() == King) )
 			{//If the card is a face card, use rank 10.
 				handString = "Pair 10";
 			}
-			else if( playerHand.getCard(0).getRank() == Card::Ace )
+			else if( playerHand.getCard(0).getRank() == Ace )
 			{//If the card is an ace, use rank A.
 				handString = "Pair A";
 			}
@@ -72,7 +72,7 @@ namespace Blackjack
 		{
 			return recommendations.at( mapKey );
 		}
-		catch(..)
+		catch(...)
 		{
 			//Threw exception, probably because the key wasn't there. This would be expected, so probably nothing needed here.
 		}
@@ -97,7 +97,7 @@ namespace Blackjack
 				std::string handValue;//The user's hand's value.
 				std::string tokens;//To hold all the tokens once the line has been split.
 				Card::Rank rank;
-				std::pair<std::string, Card::Rank> recPair;//The pair to put in the map.
+				std::pair<std::string, Rank> recPair;//The pair to put in the map.
 
 				std::cout << recString << std::endl;
 
@@ -107,7 +107,7 @@ namespace Blackjack
 
 				//Get and save the recommendation for the dealer's rank two card.
 				recPair.first = handValue;
-				recPair.second = Card::Two;
+				recPair.second = Two;
 				if( tokens.at(1).compare("Stand") == 0 )
 				{//If the recommendation is stand, store that in the rank.
 					recommendations[recPair] = AutoStrategy::Stand;
@@ -126,7 +126,7 @@ namespace Blackjack
 				}
 
 				//Get and save the recommendation for the dealer's rank three card.
-				recPair.second = Card::Three;
+				recPair.second = Three;
 				if( tokens.at(2).compare("Stand") == 0 )
 				{//If the recommendation is stand, store that in the rank.
 					recommendations[recPair] = AutoStrategy::Stand;
@@ -145,7 +145,7 @@ namespace Blackjack
 				}
 
 				//Get and save the recommendation for the dealer's rank four card.
-				recPair.second = Card::Four;
+				recPair.second = Four;
 				if( tokens.at(3).compare("Stand") == 0 )
 				{//If the recommendation is stand, store that in the rank.
 					recommendations[recPair] = AutoStrategy::Stand;
@@ -164,7 +164,7 @@ namespace Blackjack
 				}
 
 				//Get and save the recommendation for the dealer's rank five card.
-				recPair.second = Card::Five;
+				recPair.second = Five;
 				if( tokens.at(4).compare("Stand") == 0 )
 				{//If the recommendation is stand, store that in the rank.
 					recommendations[recPair] = AutoStrategy::Stand;
@@ -183,7 +183,7 @@ namespace Blackjack
 				}
 
 				//Get and save the recommendation for the dealer's rank six card.
-				recPair.second = Card::Six;
+				recPair.second = Six;
 				if( tokens.at(5).compare("Stand") == 0 )
 				{//If the recommendation is stand, store that in the rank.
 					recommendations[recPair] = AutoStrategy::Stand;
@@ -202,7 +202,7 @@ namespace Blackjack
 				}
 
 				//Get and save the recommendation for the dealer's rank seven card.
-				recPair.second = Card::Seven;
+				recPair.second = Seven;
 				if( tokens.at(6).compare("Stand") == 0 )
 				{//If the recommendation is stand, store that in the rank.
 					recommendations[recPair] = AutoStrategy::Stand;
@@ -221,7 +221,7 @@ namespace Blackjack
 				}
 
 				//Get and save the recommendation for the dealer's rank eight card.
-				recPair.second = Card::Eight;
+				recPair.second = Eight;
 				if( tokens.at(7).compare("Stand") == 0 )
 				{//If the recommendation is stand, store that in the rank.
 					recommendations[recPair] = AutoStrategy::Stand;
@@ -240,7 +240,7 @@ namespace Blackjack
 				}
 
 				//Get and save the recommendation for the dealer's rank nine card.
-				recPair.second = Card::Nine;
+				recPair.second = Nine;
 				if( tokens.at(8).compare("Stand") == 0 )
 				{//If the recommendation is stand, store that in the rank.
 					recommendations[recPair] = AutoStrategy::Stand;
@@ -259,7 +259,7 @@ namespace Blackjack
 				}
 
 				//Get and save the recommendation for the dealer's rank ten card.
-				recPair.second = Card::Ten;
+				recPair.second = Ten;
 				if( tokens.at(9).compare("Stand") == 0 )
 				{//If the recommendation is stand, store that in the rank.
 					recommendations[recPair] = AutoStrategy::Stand;
@@ -278,7 +278,7 @@ namespace Blackjack
 				}
 
 				//Get and save the recommendation for the dealer's ace card.
-				recPair.second = Card::Ace;
+				recPair.second = Ace;
 				if( tokens.at(10).compare("Stand") == 0 )
 				{//If the recommendation is stand, store that in the rank.
 					recommendations[recPair] = AutoStrategy::Stand;

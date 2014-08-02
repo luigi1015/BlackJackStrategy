@@ -19,7 +19,7 @@ namespace Blackjack
 			Card();//Default Cunstructor.
 			Card( Rank newCardRank, Suit newCardSuit );//Initializes the card's value.
 			void setRank( Rank newCardRank );//Set the rank.
-			int getRank() const;//Return the rank.
+			Rank getRank() const;//Return the rank.
 			void setSuit( Suit newCardSuit );//Set the suit.
 			int getSuit() const;//Return the suit.
 			size_t getPoints() const;//Return the numeric value of the rank according to the rules of Blackjack. Ace returns 11 instead of 1.
@@ -46,7 +46,7 @@ namespace Blackjack
 		cardRank = newCardRank;
 	}
 
-	int Card::getRank() const
+	Rank Card::getRank() const
 	{//Return the rank.
 		return cardRank;
 	}
