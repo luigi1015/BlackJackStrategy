@@ -25,8 +25,8 @@ namespace Blackjack
 	int InternetRecommendedStrategy::decide( Card dealerCard, Hand playerHand ) const
 	{//Takes the dealer's card, the player's cards, decide what to do from the recommendations file, and return the appropriate Decision value.
 		std::string handString;//The player's hand as a string, used for looking up the recommendation in the map.
-		Card::Rank dealerRank;//The rank of the dealer's card, used for looking up the recommendation in the map.
-		std::pair<std::string, Card::Rank> mapKey;//The pair to use as a key for the map.
+		Rank dealerRank;//The rank of the dealer's card, used for looking up the recommendation in the map.
+		std::pair<std::string, Rank> mapKey;//The pair to use as a key for the map.
 
 		readRecommendations();//Read the recommendations from the file.
 		

@@ -57,7 +57,7 @@ namespace Blackjack
 			Card getRandomCard();//Returns a randomly valued card.
 			void clearHands();//Clear the player's hands.
 			void setDealerCard( Card dealerCard );//Set the dealer's card to show to the player.
-			Card Player::getDealerCard();//Return's the dealer's card that the player has on record.
+			Card getDealerCard();//Return's the dealer's card that the player has on record.
 	};
 }
 

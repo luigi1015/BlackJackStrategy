@@ -38,11 +38,14 @@ HandsIterator.o: HandsIterator.h HandsIterator.cpp
 HandTest: Hand.h Hand.cpp Hand.o HandTest.cpp
 	g++ -g -Wall -o HandTest HandTest.cpp Hand.o Card.o -lcppunit
 
+InternetRecommendedStrategy.o: InternetRecommendedStrategy.h InternetRecommendedStrategy.cpp
+	g++ -g -Wall -c InternetRecommendedStrategy.cpp
+
 #BlackJack: Player.h Player.cpp AutoPlayer.h AutoPlayer.cpp UserPlayer.h UserPlayer.cpp HandCollection.h HandCollection.cpp Hand.h Hand.cpp Card.h Card.cpp AutoStrategy.h
 #	g++ -g -Wall -std=c++11 Player.h Player.cpp AutoPlayer.h AutoPlayer.cpp UserPlayer.h UserPlayer.cpp HandCollection.h HandCollection.cpp Hand.h Hand.cpp Card.h Card.cpp main.cpp -o BlackJack
 
-BlackJack: Player.h Player.cpp AutoPlayer.h AutoPlayer.cpp UserPlayer.h UserPlayer.cpp HandCollection.h HandCollection.cpp Hand.h Hand.cpp Card.h Card.cpp AutoStrategy.h main.cpp Dealer.o Player.o Hand.o HandCollection.o UserPlayer.o AutoPlayer.o Card.o
-	g++ -g -Wall -std=c++11 main.cpp Dealer.o Player.o Hand.o HandCollection.o UserPlayer.o AutoPlayer.o Card.o -o BlackJack
+BlackJack: Player.h Player.cpp AutoPlayer.h AutoPlayer.cpp UserPlayer.h UserPlayer.cpp HandCollection.h HandCollection.cpp Hand.h Hand.cpp Card.h Card.cpp AutoStrategy.h InternetRecommendedStrategy.h InternetRecommendedStrategy.cpp main.cpp Dealer.o Player.o Hand.o HandCollection.o UserPlayer.o AutoPlayer.o Card.o InternetRecommendedStrategy.o
+	g++ -g -Wall -std=c++11 main.cpp Dealer.o Player.o Hand.o HandCollection.o UserPlayer.o AutoPlayer.o Card.o InternetRecommendedStrategy.o -o BlackJack
 
 #HandsIteratorTest: Hand.h Hand.cpp Hand.o Card.h Card.cpp Card.o HandsIterator.h HandsIterator.cpp HandsIterator.o HandCollection.h HandCollection.cpp HandCollection.o Player.h Player.cpp Player.o HandsIteratorTest.cpp
 #	g++ -g -Wall -o HandsIteratorTest HandsIteratorTest.cpp HandsIterator.o Hand.o Card.o Player.o HandCollection.o -lcppunit
