@@ -12,8 +12,8 @@ namespace Blackjack
 
 		public:
 			enum Decision { Hit, Stand, DoubleDown, Split };
-			virtual ~AutoStrategy();//Default destructor
-			virtual int decide( Card dealerCard, Hand playerHand ) const;//Takes the dealer's card, the player's cards, decide what to do, and return the appropriate Decision value.
+			virtual ~AutoStrategy() {};//Default destructor
+			virtual int decide( Card dealerCard, Hand playerHand ) { return 0; };//Takes the dealer's card, the player's cards, decide what to do, and return the appropriate Decision value.
 	};
 }
 

@@ -50,47 +50,50 @@ namespace Blackjack
 				(*itr).setBet( 5 );
 				std::cout << "Betting " << (*itr).getBet() << std::endl;
 
-				//Get the decision from the strategy.
-				int decision = strategy->decide( dealerCard, *itr );
-				
-				switch( decision )
-				{//Run the decision decided by the strategy.
-					case AutoStrategy::Hit://Hit
-						std::cout << "Hit" << std::endl;
-						(*itr).addCard( getRandomCard() );//Put in a random card.
-						break;
-
-					case AutoStrategy::Stand://Stand
-						std::cout << "Stand" << std::endl;
-						doneWithThisHand = true;
-						break;
-
-					case AutoStrategy::DoubleDown://Double Down
-						if( (*itr).getBet() * 2 <= getMoney() )
-						{//If the player has enough money for a double down, double down.
-							std::cout << "Double Down" << std::endl;
-							(*itr).doubleBet();
+				while( (doneWithThisHand == false) && ((*itr).getMaxPointsAtOrBelow21() < 21) )
+				{//Continue on until the player decides to stop or 21+ has been reached.
+					//Get the decision from the strategy.
+					int decision = strategy->decide( dealerCard, *itr );
+					
+					switch( decision )
+					{//Run the decision decided by the strategy.
+						case AutoStrategy::Hit://Hit
+							std::cout << "Hit" << std::endl;
 							(*itr).addCard( getRandomCard() );//Put in a random card.
+							break;
+
+						case AutoStrategy::Stand://Stand
+							std::cout << "Stand" << std::endl;
 							doneWithThisHand = true;
-						}
-						else
-						{//If the player doesn't have enough money for a double down, just do a hit.
-							std::cout << "Tried to do a double down, but don't have anough money, hitting." << std::endl;
-							(*itr).addCard( getRandomCard() );//Put in a random card.
-						}
-						break;
+							break;
 
-					case AutoStrategy::Split://Split
-						std::cout << "Split" << std::endl;
-						split( itr );
-						break;
+						case AutoStrategy::DoubleDown://Double Down
+							if( (*itr).getBet() * 2 <= getMoney() )
+							{//If the player has enough money for a double down, double down.
+								std::cout << "Double Down" << std::endl;
+								(*itr).doubleBet();
+								(*itr).addCard( getRandomCard() );//Put in a random card.
+								doneWithThisHand = true;
+							}
+							else
+							{//If the player doesn't have enough money for a double down, just do a hit.
+								std::cout << "Tried to do a double down, but don't have anough money, hitting." << std::endl;
+								(*itr).addCard( getRandomCard() );//Put in a random card.
+							}
+							break;
 
+						case AutoStrategy::Split://Split
+							std::cout << "Split" << std::endl;
+							split( itr );
+							break;
+
+					}
+					
+					//Print out the hand at the end of the play
+					std::cout << "This hand: " << std::endl;
+					std::cout << *itr << std::endl;//Print out the hand to the user.
+					std::cout << "Points: " << (*itr).getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
 				}
-				
-				//Print out the hand at the end of the play
-				std::cout << "This hand: " << std::endl;
-				std::cout << *itr << std::endl;//Print out the hand to the user.
-				std::cout << "Points: " << (*itr).getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
 			}
 		}
 		else

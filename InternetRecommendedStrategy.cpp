@@ -305,7 +305,21 @@ namespace Blackjack
 
 	std::vector<std::string> InternetRecommendedStrategy::parseLine( std::string line, std::string delim )
 	{//Parse line into tokens separated by delim and return the tokens in a vector.
+		//char delim = ",";//The delimiter to look for.
 		std::vector<std::string> tokens;//The tokens to return.
+		size_t first = 0;//The position of the first character of the token.
+		size_t last = 0;//The position of the last character of the token.
+
+		do
+		{
+			last = line.find( delim, first );//Find the first occurence of the delimiter after position first.
+			tokens.push_back( line.substr(first, last-first) );//Put the token into the vector.
+			first = last + 1;//Go to the next token
+		}
+		while( last != std::string::npos );//Go until there aren't any more delimiters (in which case the find method returns npos).
+
+		return tokens;
+/*
 		std::string token;//A holder for the token.
 		std::stringstream lineStream( line );//A stream of the line to put into getline for splitting the line token by token.
 
@@ -315,5 +329,6 @@ namespace Blackjack
 		}
 
 		return tokens;
+*/
 	}
 }
