@@ -25,7 +25,7 @@ namespace Blackjack
 	int InternetRecommendedStrategy::decide( Card dealerCard, Hand playerHand )
 	{//Takes the dealer's card, the player's cards, decide what to do from the recommendations file, and return the appropriate Decision value.
 		std::string handString;//The player's hand as a string, used for looking up the recommendation in the map.
-		Rank dealerRank;//The rank of the dealer's card, used for looking up the recommendation in the map.
+		//Rank dealerRank;//The rank of the dealer's card, used for looking up the recommendation in the map.
 		std::pair<std::string, Rank> mapKey;//The pair to use as a key for the map.
 
 		readRecommendations();//Read the recommendations from the file.
@@ -80,9 +80,9 @@ namespace Blackjack
 		return AutoStrategy::Stand;//Default recommendation to return.
 	}
 
-	void InternetRecommendedStrategy::readRecommendations( std::string recommendationsFilename = "InternetStrategyTable.csv" )
+	void InternetRecommendedStrategy::readRecommendations( std::string recommendationsFilename )
 	{//Reads the recommendations from the csv file and populates the recommendations map object accordingly.
-		std::ifstream recommendationsFile( recommendationsFilename );
+		std::ifstream recommendationsFile( recommendationsFilename.c_str() );
 		std::string recString;
 		std::string delim = ",";//The delimiter of the file.
 		
@@ -90,13 +90,13 @@ namespace Blackjack
 		{//If the file opened, read from it.
 			std::cout << "Opening file " << recommendationsFilename << std::endl;
 
-			while( std::getline( recommendationsFile, recString )
+			while( std::getline( recommendationsFile, recString ) )
 			{
 				//std::stringstream lineStream( recString );//A stream of the line to put into getline for splitting the line token by token.
 				//std::string tok;//A holder for the token.
 				std::string handValue;//The user's hand's value.
-				std::string tokens;//To hold all the tokens once the line has been split.
-				Card::Rank rank;
+				std::vector<std::string> tokens;//To hold all the tokens once the line has been split.
+				//Rank rank;
 				std::pair<std::string, Rank> recPair;//The pair to put in the map.
 
 				std::cout << recString << std::endl;
@@ -309,7 +309,7 @@ namespace Blackjack
 		std::string token;//A holder for the token.
 		std::stringstream lineStream( line );//A stream of the line to put into getline for splitting the line token by token.
 
-		while( std::getline(line, token, delim) )
+		while( std::getline(lineStream, token, delim) )
 		{
 			tokens.push_back( token );
 		}
