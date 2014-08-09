@@ -88,7 +88,7 @@ namespace Blackjack
 		
 		if( recommendationsFile.is_open() )
 		{//If the file opened, read from it.
-			std::cout << "Opening file " << recommendationsFilename << std::endl;
+			//std::cout << "Opening file " << recommendationsFilename << std::endl;
 
 			while( std::getline( recommendationsFile, recString ) )
 			{
@@ -99,7 +99,7 @@ namespace Blackjack
 				//Rank rank;
 				std::pair<std::string, Rank> recPair;//The pair to put in the map.
 
-				std::cout << recString << std::endl;
+				//std::cout << recString << std::endl;
 
 				tokens = parseLine( recString, delim );//Go ahead and split the line.
 

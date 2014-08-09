@@ -47,6 +47,7 @@ namespace Blackjack
 	void Dealer::startGame()
 	{//Starts the players playing.
 		std::vector<Player*>::iterator pit;
+		long rounds = 0;//The number of rounds played.
 
 		for( pit = players.begin(); pit != players.end(); pit++ )
 		{//Go through the players and give them some betting money.
@@ -55,6 +56,8 @@ namespace Blackjack
 
 		while( players.size() > 0 )
 		{
+			std::cout << std::endl << std::endl << "Round: " << ++rounds << std::endl;//Print the round.
+
 			for( pit = players.begin(); pit != players.end(); pit++ )
 			{//Go through the players and have each them play a hand.
 				(*pit)->setDealerCard( collHands.getHand(0).getCard(0) );
