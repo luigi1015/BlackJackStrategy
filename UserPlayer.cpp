@@ -59,8 +59,10 @@ namespace Blackjack
 				newHand.addCard( getRandomCard() );//Get the second random card of the hand.
 				collHands.addHand( newHand );//Add the new hand to the collection of hands.
 			}
-			
+
+			//HandCollection::HandList::iterator itr = collHands.begin();
 			for( HandCollection::HandList::iterator itr = collHands.begin(); itr != collHands.end(); itr++ )
+			//do
 			{//Play each hand by iteration through them.
 				bool doneWithThisHand = false;//Used to keep track of wether the user has decided to stop playing this hand.
 				//bet = 0;//Reset the bet.
@@ -103,6 +105,7 @@ namespace Blackjack
 							(*itr).doubleBet();
 							(*itr).addCard( getRandomCard() );//Put in a random card.
 							doneWithThisHand = true;
+							//itr++;//Go to the next hand.
 						}
 						else if( !caseInsensitiveStringCompare(doubleDownInput, "N") )
 						{//If the user didn't specify yes (previous if statement) or no (this if statement), give the user an error.
@@ -130,6 +133,7 @@ namespace Blackjack
 						{//If the user said yes, split the hand.
 							//Finish this code later
 							//std::cout << "This feature is still under construction." << std::endl;
+							//itr = split( itr );
 							split( itr );
 						}
 						else if( !caseInsensitiveStringCompare(splitInput, "N") )
@@ -164,6 +168,7 @@ namespace Blackjack
 						else if( caseInsensitiveStringCompare(dealInput, "s") )
 						{//User selected stand, so done with this hand.
 							doneWithThisHand = true;
+							//itr++;//Go to the next hand.
 						}
 						else
 						{//If the user didn't specify hit or stand, give the user an error.
@@ -177,7 +182,7 @@ namespace Blackjack
 				std::cout << "This hand: " << std::endl;
 				std::cout << *itr << std::endl;//Print out the hand to the user.
 				std::cout << "Points: " << (*itr).getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
-			}
+			}//while( itr != collHands.end() );
 		}
 		else
 		{//The user doesn't have any money left. Let the user know.

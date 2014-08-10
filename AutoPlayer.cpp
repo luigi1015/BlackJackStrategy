@@ -41,8 +41,10 @@ namespace Blackjack
 				newHand.addCard( getRandomCard() );//Get the second random card of the hand.
 				collHands.addHand( newHand );//Add the new hand to the collection of hands.
 			}
-			
+
+			//HandCollection::HandList::iterator itr = collHands.begin();
 			for( HandCollection::HandList::iterator itr = collHands.begin(); itr != collHands.end(); itr++ )
+			//do
 			{//Play each hand by iteration through them.
 				bool doneWithThisHand = false;//Used to keep track of wether the user has decided to stop playing this hand.
 
@@ -65,6 +67,7 @@ namespace Blackjack
 						case AutoStrategy::Stand://Stand
 							std::cout << "Stand" << std::endl;
 							doneWithThisHand = true;
+							//itr++;//Go to the next hand.
 							break;
 
 						case AutoStrategy::DoubleDown://Double Down
@@ -74,6 +77,7 @@ namespace Blackjack
 								(*itr).doubleBet();
 								(*itr).addCard( getRandomCard() );//Put in a random card.
 								doneWithThisHand = true;
+								//itr++;//Go to the next hand.
 							}
 							else
 							{//If the player doesn't have enough money for a double down, just do a hit.
@@ -84,6 +88,7 @@ namespace Blackjack
 
 						case AutoStrategy::Split://Split
 							std::cout << "Split" << std::endl;
+							//itr = split( itr );
 							split( itr );
 							break;
 
@@ -94,7 +99,7 @@ namespace Blackjack
 					std::cout << *itr << std::endl;//Print out the hand to the user.
 					std::cout << "Points: " << (*itr).getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
 				}
-			}
+			}//while( itr != collHands.end() );
 		}
 		else
 		{//The user doesn't have any money left. Let the user know.

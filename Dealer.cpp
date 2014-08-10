@@ -83,7 +83,7 @@ namespace Blackjack
 						}
 						else if( !(*hand).isBust() )
 						{//If the hand isn't a blackjack or a bust, give the bet to the player.
-							(*pit)->addMoney( (*pit)->getMoney() );
+							(*pit)->addMoney( (*hand).getBet() );
 							std:: cout << "Player " << (*pit)->getName() << " won " << (*hand).getBet() << std::endl;
 						}
 						else
@@ -138,7 +138,7 @@ namespace Blackjack
 				
 				if( (*pit)->askQuit() == Player::quitPlaying )
 				{//Ask if the player wants to quit.
-					pit = players.erase( pit );//Erase the plaer and get the new iterator.
+					pit = players.erase( pit );//Erase the player and get the new iterator.
 				}
 				else
 				{//The player didn't want to quit, so just move on.

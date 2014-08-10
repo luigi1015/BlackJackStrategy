@@ -29,7 +29,7 @@ namespace Blackjack
 			HandCollection& getHands();//Returns the hands as a vector. This is mainly for use with HandsIterator.
 			//void split( size_t n );//Splits the hand at location n. Throws an exception if the hand can't be split according to the rules of blackjack. n should be between 0 and numHands()-1, inclusive.
 			//void split( HandsIterator iteratorPosition );//Splits the hand at the location pointed to by iteratorPosition. Throws an exception if the hand can't be split according to the rules of blackjack.
-			void split( HandCollection::HandList::iterator iteratorPosition );//Splits the hand at the location pointed to by iteratorPosition. Throws an exception if the hand can't be split according to the rules of blackjack.
+			HandCollection::HandList::iterator split( HandCollection::HandList::iterator iteratorPosition );//Splits the hand at the location pointed to by iteratorPosition. Throws an exception if the hand can't be split according to the rules of blackjack.
 			//void addHand( Hand newHand );//Add a hand to the end of the list;
 			//void addHand( Hand newHand, size_t n );//Add a hand at location n. n should be between 0 and numHands()-1, inclusive.
 			//void clearHands();//Remove all the hands.
@@ -104,27 +104,28 @@ namespace Blackjack
 		return collHands;
 	}
 
-	void Player::split( HandCollection::HandList::iterator iteratorPosition )
+	HandCollection::HandList::iterator Player::split( HandCollection::HandList::iterator iteratorPosition )
 	{//Splits the hand at the location pointed to by iteratorPosition. Throws an exception if the hand can't be split according to the rules of blackjack.
 		if( (*iteratorPosition).canSplit() )
 		{//If the hand can be split, go ahead and split it.
 			Card splitCard = (*iteratorPosition).getCard(0);//Get the first card
-			//Card randomCard1( static_cast<Rank>(0,12), static_cast<Suit>(0,3) );//Get a random card
-			//Card randomCard2( static_cast<Rank>(0,12), static_cast<Suit>(0,3) );//Get another random card
 			(*iteratorPosition).removeCard( (*iteratorPosition).getNumCards()-1 );//Remove the last card.
-			//(*iteratorPosition).addCard( myDealer->getRandomCard() );//Replace the last card.
 			(*iteratorPosition).addCard( getRandomCard() );//Replace the last card.
 
 			//Create the new hand with the split card.
 			Hand newHand;
 			newHand.addCard( splitCard );//Put in the split card.
-			//newHand.addCard( myDealer->getRandomCard() );//Put in a random card to round out the hand.
 			newHand.addCard( getRandomCard() );//Put in a random card to round out the hand.
 			collHands.addHand( newHand );//Add the hand to the collection.
+
+			//Return an iterator to the beginning of the hand so that it'll have a valid iterator.
+			return collHands.begin();
 		}
 		else
 		{//If the hand can't be split, give an error.
 			std::cerr << "The hand can't be split." << std::endl;
+			//Return the parameter iterator since the hand collection and therefore the iterator haven't changed.
+			return iteratorPosition;
 		}
 	}
 
@@ -196,7 +197,9 @@ namespace Blackjack
 
 	long Player::addMoney( long newMoney )
 	{//Adds newMoney of money to the amount the player has and returns the updated amount.
+		std::cout << "Adding " << newMoney << " to player's money." << std::endl;
 		money += newMoney;
+		std::cout << "Player now has " << money << " money." << std::endl;
 		return money;
 	}
 
@@ -218,7 +221,12 @@ namespace Blackjack
 
 	Card Player::getRandomCard()
 	{//Gets a random card for the hand pointed to by iteratorPosition.
-		Card randomCard( static_cast<Rank>(RNG::generateNumber<int>(0,12)), static_cast<Suit>(RNG::generateNumber<int>(0,3)) );//Get a random card
+		//std::cout << "Generating random card: " << std::endl;
+		int randomRank = RNG::generateNumber<int>(0,12);
+		//std::cout << "Rank(# between 0 and 12): " << randomRank << std::endl;
+		int randomSuit = RNG::generateNumber<int>(0,3);
+		//std::cout << "Suit(# between 0 and 3): " << randomSuit << std::endl;
+		Card randomCard( static_cast<Rank>(randomRank), static_cast<Suit>(randomSuit) );//Get a random card
 		return randomCard;
 	}
 
