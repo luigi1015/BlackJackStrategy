@@ -60,15 +60,19 @@ namespace Blackjack
 				collHands.addHand( newHand );//Add the new hand to the collection of hands.
 			}
 
+			size_t i = 0;
 			//HandCollection::HandList::iterator itr = collHands.begin();
-			for( HandCollection::HandList::iterator itr = collHands.begin(); itr != collHands.end(); itr++ )
-			//do
+			//for( HandCollection::HandList::iterator itr = collHands.begin(); itr != collHands.end(); itr++ )
+			do
 			{//Play each hand by iteration through them.
 				bool doneWithThisHand = false;//Used to keep track of wether the user has decided to stop playing this hand.
-				//bet = 0;//Reset the bet.
+
+				//Print out the hand at the beginning of play
+				printHand( i );
 
 				std::string input;
-				while( ((*itr).getBet() <= 0) || ((*itr).getBet() > getMoney()) )
+				//while( ((*itr).getBet() <= 0) || ((*itr).getBet() > getMoney()) )
+				while( (collHands.getHand(i).getBet() <= 0) || (collHands.getHand(i).getBet() > getMoney()) )
 				{//Keep asking for a bet until you get a valid one (bet needs to be a positive number less than or equal to the amount of money the player has.
 					long tempBet;//Temporary variable to hold the value of the bet temporarily.
 					std::cout << "You have " << getMoney() << " money left. How much do you want to bet? ";
@@ -80,20 +84,25 @@ namespace Blackjack
 						std::cerr << "The bet you entered, " << tempBet << ", was invalid, please try again with a number between 1 and " << getMoney() << "." << std::endl;
 					}
 					else
-					{//The bet is valid, set the bet and take the bet out of the player's money..
-						(*itr).setBet( tempBet );
+					{//The bet is valid, set the bet and take the bet out of the player's money.
+						//(*itr).setBet( tempBet );
+						collHands.getHand(i).setBet( tempBet );
 						//money -= tempBet;
 					}
 				}
 
 				//Double Down
-				if( (*itr).getBet() * 2 <= getMoney() )
+				//if( (*itr).getBet() * 2 <= getMoney() )
+				if( collHands.getHand(i).getBet() * 2 <= getMoney() )
 				{//If the player has enough money, let the player double down.
 					std::string doubleDownInput;
 					do
 					{//Keep looping until get a y or a n from the user.
-						std::cout << *itr << std::endl;//Print out the hand to the user.
-						std::cout << "Points: " << (*itr).getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
+						//std::cout << *itr << std::endl;//Print out the hand to the user.
+						//std::cout << "Points: " << (*itr).getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
+						//std::cout << collHands.getHand(i) << std::endl;//Print out the hand to the user.
+						//std::cout << "Points: " << collHands.getHand(i).getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
+						//printHand( i );//Print the hand for the user to make a decision.
 						std::cout << "Money: " << getMoney() << std::endl;//Print out the amount of money the user has.
 						std::cout << "Do you want to double down? (y/n) ";
 						std::cin >> doubleDownInput;
@@ -102,16 +111,19 @@ namespace Blackjack
 						{//If the user said yes, double down and take the additional bet amount out of the player's money.
 							//bet *= 2;
 							//money -= (*itr).getBet();
-							(*itr).doubleBet();
-							(*itr).addCard( getRandomCard() );//Put in a random card.
+							//(*itr).doubleBet();
+							//(*itr).addCard( getRandomCard() );//Put in a random card.
+							collHands.getHand(i).doubleBet();
+							collHands.getHand(i).addCard( getRandomCard() );//Put in a random card.
 							doneWithThisHand = true;
 							//itr++;//Go to the next hand.
+							//i++;//Go to the next hand.
 						}
 						else if( !caseInsensitiveStringCompare(doubleDownInput, "N") )
 						{//If the user didn't specify yes (previous if statement) or no (this if statement), give the user an error.
 							std::cerr << "Please input the character y or the character n." << std::endl;
 						}
-					}while( !caseInsensitiveStringCompare(doubleDownInput, "Y") && !caseInsensitiveStringCompare(doubleDownInput, "N") );
+					}while( (caseInsensitiveStringCompare(doubleDownInput, "Y") == false) && (caseInsensitiveStringCompare(doubleDownInput, "N") == false) );
 				}
 				else
 				{//Let the user know the user can't souble down.
@@ -119,13 +131,16 @@ namespace Blackjack
 				}
 
 				//Split
-				if( (*itr).canSplit() )
+				//if( (*itr).canSplit() )
+				if( collHands.getHand(i).canSplit() )
 				{//If the hand can be split, ask the user wether to do that.
 					std::string splitInput;
 					do
 					{//Keep looping until get a y or a n from the user.
-						std::cout << *itr << std::endl;//Print out the hand to the user.
-						std::cout << "Points: " << (*itr).getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
+						//std::cout << *itr << std::endl;//Print out the hand to the user.
+						//std::cout << "Points: " << (*itr).getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
+						//std::cout << collHands.getHand(i) << std::endl;//Print out the hand to the user.
+						//std::cout << "Points: " << collHands.getHand(i).getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
 						std::cout << "This hand can be split. Do you want to split the hand? (y/n) ";
 						std::cin >> splitInput;
 
@@ -134,7 +149,8 @@ namespace Blackjack
 							//Finish this code later
 							//std::cout << "This feature is still under construction." << std::endl;
 							//itr = split( itr );
-							split( itr );
+							//split( itr );
+							split( collHands.begin()+i );
 						}
 						else if( !caseInsensitiveStringCompare(splitInput, "N") )
 						{//If the user didn't specify yes (previous if statement) or no (this if statement), give the user an error.
@@ -142,11 +158,14 @@ namespace Blackjack
 						}
 					}while( !caseInsensitiveStringCompare(splitInput, "Y") && !caseInsensitiveStringCompare(splitInput, "N") );
 				}
-					
-				while( (doneWithThisHand != true) && ((*itr).getMaxPointsAtOrBelow21() < 21) )
+
+				//while( (doneWithThisHand != true) && ((*itr).getMaxPointsAtOrBelow21() < 21) )
+				while( (doneWithThisHand != true) && !(collHands.getHand(i).isBust()) )
 				{//While  the user hasn't decided to stop playing this hand and the hand is below 21 points, keep playing this hand.
-					std::cout << *itr << std::endl;//Print out the hand to the user.
-					std::cout << "Points: " << (*itr).getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
+					//std::cout << *itr << std::endl;//Print out the hand to the user.
+					//std::cout << "Points: " << (*itr).getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
+					std::cout << collHands.getHand(i) << std::endl;//Print out the hand to the user.
+					std::cout << "Points: " << collHands.getHand(i).getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
 
 					//if( *itr.getMaxPointsAtOrBelow21() < 21 )
 					//{//If the points for this hand are below 21, see if the user wants to keep going.
@@ -155,7 +174,9 @@ namespace Blackjack
 					std::string dealInput;
 					do
 					{//Keep looping until get a y or a n from the user.
-						std::cout << *itr << std::endl;
+						//std::cout << *itr << std::endl;
+						//std::cout << collHands.getHand(i) << std::endl;
+						printHand( i );//Print the hand so the user can make a decision.
 						std::cout << "Do you want to hit or stand? (h/s) ";
 						std::cin >> dealInput;
 
@@ -163,12 +184,21 @@ namespace Blackjack
 						{//If the user said yes, deal a card.
 							//Finish this code later
 							//std::cout << "This feature is still under construction." << std::endl;
-							(*itr).addCard( getRandomCard() );//Put in a random card.
+							//(*itr).addCard( getRandomCard() );//Put in a random card.
+							collHands.getHand(i).addCard( getRandomCard() );//Put in a random card.
+					
+							//If this hand is a bust, go to the next hand.
+							if( collHands.getHand(i).isBust() )
+							{
+								//i++;
+								doneWithThisHand = true;
+							}
 						}
 						else if( caseInsensitiveStringCompare(dealInput, "s") )
 						{//User selected stand, so done with this hand.
 							doneWithThisHand = true;
 							//itr++;//Go to the next hand.
+							//i++;//Go to the next hand.
 						}
 						else
 						{//If the user didn't specify hit or stand, give the user an error.
@@ -178,11 +208,17 @@ namespace Blackjack
 					//}
 				}
 				
+				i++;//Go to the next hand.
+
+				/*
 				//Print out the hand at the end of the play
 				std::cout << "This hand: " << std::endl;
-				std::cout << *itr << std::endl;//Print out the hand to the user.
-				std::cout << "Points: " << (*itr).getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
-			}//while( itr != collHands.end() );
+				//std::cout << *itr << std::endl;//Print out the hand to the user.
+				//std::cout << "Points: " << (*itr).getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
+				std::cout << collHands.getHand(i) << std::endl;//Print out the hand to the user.
+				std::cout << "Points: " << collHands.getHand(i).getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
+				*/
+			}while( i < collHands.numHands() );
 		}
 		else
 		{//The user doesn't have any money left. Let the user know.

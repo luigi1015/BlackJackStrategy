@@ -44,20 +44,21 @@ namespace Blackjack
 			virtual int askQuit();//Rerturns an int of value from playReturnValues based on whether the user wants to quit or keep playing.
 			void getRandomCard( HandCollection::HandList::iterator iteratorPosition );//Gets a random card for the hand pointed to by iteratorPosition.
 			void setName( std::string newName );//Sets the name of the player.
-			std::string getName();//Returns the name of the player.
+			std::string getName() const;//Returns the name of the player.
 			//void setDealer( Dealer* newDealer );//Set the dealer.
 			void setID( unsigned int newID );//Set the ID to newID.
-			unsigned int getID();//Returns the ID.
+			unsigned int getID() const;//Returns the ID.
 			long setMoney( long newMoney );//Sets the amount of money the player has and returns that amount.
-			long getMoney();//Returns the amount of money the player has.
+			long getMoney() const;//Returns the amount of money the player has.
 			long addMoney( long newMoney );//Adds newMoney of money to the amount the player has and returns the updated amount.
 			long subtractMoney( long newMoney );//Subtracts newMoney of money from the amount the player has and returns the updated amount.
 			HandCollection::HandList::iterator handsBegin();//An iterator for the beginning of the player's hands.
 			HandCollection::HandList::iterator handsEnd();//An iterator for the end of the player's hands.
-			Card getRandomCard();//Returns a randomly valued card.
+			Card getRandomCard() const;//Returns a randomly valued card.
 			void clearHands();//Clear the player's hands.
 			void setDealerCard( Card dealerCard );//Set the dealer's card to show to the player.
-			Card getDealerCard();//Return's the dealer's card that the player has on record.
+			Card getDealerCard() const;//Return's the dealer's card that the player has on record.
+			void printHand( size_t i ) const;//Print hand at location i.
 	};
 }
 

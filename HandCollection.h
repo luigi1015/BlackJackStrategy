@@ -13,6 +13,7 @@ namespace Blackjack
 			HandCollection();//Default Cunstructor.
 			size_t numHands() const;//Returns the number of hands in the collection.
 			Hand& getHand( size_t n );//Returns the hand at location n. n should be between 0 and numHands()-1, inclusive.
+			Hand getHand( size_t n ) const;//Returns the hand at location n. n should be between 0 and numHands()-1, inclusive.
 			//std::vector<Hand>& getHands();//Returns the hands as a vector. This is mainly for use with HandsIterator.
 			void addHand( Hand newHand );//Add a hand to the end of the list;
 			//void addHand( Hand newHand, size_t n );//Add a hand at location n. n should be between 0 and numHands()-1, inclusive.

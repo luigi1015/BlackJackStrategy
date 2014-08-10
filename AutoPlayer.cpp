@@ -44,10 +44,21 @@ namespace Blackjack
 
 			//HandCollection::HandList::iterator itr = collHands.begin();
 			//for( HandCollection::HandList::iterator itr = collHands.begin(); itr != collHands.end(); itr++ )
-			//do
-			for( size_t i = 0; i < collHands.numHands(); i++ )
+			//for( size_t i = 0; i < collHands.numHands(); i++ )
+			size_t i = 0;
+			do
 			{//Play each hand by iteration through them.
 				bool doneWithThisHand = false;//Used to keep track of wether the user has decided to stop playing this hand.
+
+				//Print out the hand at the beginning of play
+				printHand( i );
+				/*
+				std::cout << "This hand: " << std::endl;
+				//std::cout << *itr << std::endl;//Print out the hand to the user.
+				//std::cout << "Points: " << (*itr).getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
+				std::cout << collHands.getHand(i) << std::endl;//Print out the hand to the user.
+				std::cout << "Points: " << collHands.getHand(i).getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
+				*/
 
 				//For now, just set a standard bet.
 				//(*itr).setBet( 5 );
@@ -56,7 +67,7 @@ namespace Blackjack
 				std::cout << "Betting " << collHands.getHand(i).getBet() << std::endl;
 
 				//while( (doneWithThisHand == false) && ((*itr).getMaxPointsAtOrBelow21() < 21) )
-				while( (doneWithThisHand == false) && (collHands.getHand(i).getMaxPointsAtOrBelow21() < 21) )
+				while( (doneWithThisHand == false) && !(collHands.getHand(i).isBust()) )
 				{//Continue on until the player decides to stop or 21+ has been reached.
 					//Get the decision from the strategy.
 					//int decision = strategy->decide( dealerCard, *itr );
@@ -68,12 +79,19 @@ namespace Blackjack
 							std::cout << "Hit" << std::endl;
 							//(*itr).addCard( getRandomCard() );//Put in a random card.
 							collHands.getHand(i).addCard( getRandomCard() );//Put in a random card.
+					
+							//If this hand is a bust, go to the next hand.
+							if( collHands.getHand(i).isBust() )
+							{
+								i++;
+							}
 							break;
 
 						case AutoStrategy::Stand://Stand
 							std::cout << "Stand" << std::endl;
 							doneWithThisHand = true;
 							//itr++;//Go to the next hand.
+							i++;//Go to the next hand.
 							break;
 
 						case AutoStrategy::DoubleDown://Double Down
@@ -87,6 +105,7 @@ namespace Blackjack
 								collHands.getHand(i).addCard( getRandomCard() );//Put in a random card.
 								doneWithThisHand = true;
 								//itr++;//Go to the next hand.
+								i++;//Go to the next hand.
 							}
 							else
 							{//If the player doesn't have enough money for a double down, just do a hit.
@@ -103,15 +122,9 @@ namespace Blackjack
 							break;
 
 					}
-					
-					//Print out the hand at the end of the play
-					std::cout << "This hand: " << std::endl;
-					//std::cout << *itr << std::endl;//Print out the hand to the user.
-					//std::cout << "Points: " << (*itr).getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
-					std::cout << collHands.getHand(i) << std::endl;//Print out the hand to the user.
-					std::cout << "Points: " << collHands.getHand(i).getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
+
 				}
-			}//while( itr != collHands.end() );
+			}while( i < collHands.numHands() );
 		}
 		else
 		{//The user doesn't have any money left. Let the user know.

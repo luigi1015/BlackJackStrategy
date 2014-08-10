@@ -37,20 +37,21 @@ namespace Blackjack
 			virtual int askQuit();//Rerturns an int of value from playReturnValues based on whether the user wants to quit or keep playing.
 			void getRandomCard( HandCollection::HandList::iterator iteratorPosition );//Gets a random card for the hand pointed to by iteratorPosition.
 			void setName( std::string newName );//Sets the name of the player.
-			std::string getName();//Returns the name of the player.
+			std::string getName() const;//Returns the name of the player.
 			//void setDealer( Dealer* newDealer );//Set the dealer.
 			void setID( unsigned int newID );//Set the ID to newID.
 			unsigned int getID();//Returns the ID.
 			long setMoney( long newMoney );//Sets the amount of money the player has and returns that amount.
-			long getMoney();//Returns the amount of money the player has.
+			long getMoney() const;//Returns the amount of money the player has.
 			long addMoney( long newMoney );//Adds newMoney of money to the amount the player has and returns the updated amount.
 			long subtractMoney( long newMoney );//Subtracts newMoney of money from the amount the player has and returns the updated amount.
 			HandCollection::HandList::iterator handsBegin();//An iterator for the beginning of the player's hands.
 			HandCollection::HandList::iterator handsEnd();//An iterator for the end of the player's hands.
-			Card getRandomCard();//Returns a randomly valued card.
+			Card getRandomCard() const;//Returns a randomly valued card.
 			void clearHands();//Clear the player's hands.
 			void setDealerCard( Card dealerCard );//Set the dealer's card to show to the player.
-			Card Player::getDealerCard();//Return's the dealer's card that the player has on record.
+			Card Player::getDealerCard() const;//Return's the dealer's card that the player has on record.
+			void printHand( size_t i ) const;//Print hand at location i.
 	};
 }
 */
@@ -108,7 +109,7 @@ namespace Blackjack
 	{//Splits the hand at the location pointed to by iteratorPosition. Throws an exception if the hand can't be split according to the rules of blackjack.
 		if( (*iteratorPosition).canSplit() )
 		{//If the hand can be split, go ahead and split it.
-			Card splitCard = (*iteratorPosition).getCard(0);//Get the first card
+			Card splitCard = (*iteratorPosition).getCard(1);//Get the second/last card
 			(*iteratorPosition).removeCard( (*iteratorPosition).getNumCards()-1 );//Remove the last card.
 			(*iteratorPosition).addCard( getRandomCard() );//Replace the last card.
 
@@ -164,7 +165,7 @@ namespace Blackjack
 		name = newName;
 	}
 
-	std::string Player::getName()
+	std::string Player::getName()  const
 	{//Returns the name of the player.
 		return name;
 	}
@@ -179,7 +180,7 @@ namespace Blackjack
 		ID = newID;
 	}
 
-	unsigned int Player::getID()
+	unsigned int Player::getID() const
 	{//Returns the ID.
 		return ID;
 	}
@@ -190,7 +191,7 @@ namespace Blackjack
 		return money;
 	}
 
-	long Player::getMoney()
+	long Player::getMoney() const
 	{//Returns the amount of money the player has.
 		return money;
 	}
@@ -219,7 +220,7 @@ namespace Blackjack
 		return collHands.end();
 	}
 
-	Card Player::getRandomCard()
+	Card Player::getRandomCard() const
 	{//Gets a random card for the hand pointed to by iteratorPosition.
 		//std::cout << "Generating random card: " << std::endl;
 		int randomRank = RNG::generateNumber<int>(0,12);
@@ -249,8 +250,15 @@ namespace Blackjack
 		dealerCard = newDealerCard;
 	}
 
-	Card Player::getDealerCard()
+	Card Player::getDealerCard() const
 	{//Return's the dealer's card that the player has on record.
 		return dealerCard;
+	}
+
+	void Player::printHand( size_t i ) const
+	{//Print hand at location i.
+		std::cout << "This hand: " << std::endl;
+		std::cout << collHands.getHand(i) << std::endl;//Print out the hand to the user.
+		std::cout << "Points: " << collHands.getHand(i).getMaxPointsAtOrBelow21() << std::endl;//Print out the number of points for the user.
 	}
 }

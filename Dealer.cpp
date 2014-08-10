@@ -60,6 +60,7 @@ namespace Blackjack
 
 			for( pit = players.begin(); pit != players.end(); pit++ )
 			{//Go through the players and have each them play a hand.
+				std::cout << "Starting play for player " << (*pit)->getName() << std::endl;
 				(*pit)->setDealerCard( collHands.getHand(0).getCard(0) );
 				(*pit)->play();
 			}
